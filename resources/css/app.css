@@ -17,8 +17,3 @@
   [data-theme='pink'] {
     --my-color: #ffabc8;
   }
-
-
-  body {
-    background-color: var(--my-color);
-  }
