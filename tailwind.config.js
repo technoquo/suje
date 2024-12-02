@@ -19,7 +19,17 @@ export default {
         },
     },
     daisyui: {
-        themes: ["dark", "cupcake"],
+        themes: [
+          {
+            cupcake: {
+                ...require("daisyui/src/theming/themes")["light"],
+                primary: "#737373",
+
+              },
+          },
+          "dark",
+          "cupcake",
+        ],
       },
 
     plugins: [

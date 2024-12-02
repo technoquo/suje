@@ -29,25 +29,57 @@
                 </svg>
             </button>
             <div class="flex-1">
-                <a class="btn btn-ghost text-xl">daisyUI</a>
+                <a class="btn btn-ghost text-xl">Suje</a>
             </div>
             <div class="flex-none">
                 <!-- Menu for desktop, hidden on mobile -->
                 <ul class="menu menu-horizontal px-1 hidden lg:flex" id="menu">
-                    <li><a>Link</a></li>
-                    <li><a>Link</a></li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul class="bg-base-100 rounded-t-none p-2">
-                                <li><a>Link 1</a></li>
-                                <li><a>Link 2</a></li>
+                    <li class="relative group z-10">
+                        <a>Accueil</a>
+                        <div
+                            class="absolute hidden group-hover:flex tooltip tooltip-bottom p-2 bg-base-200 rounded top-9">
+                            <img src="https://www.escaleasbl.be/images/tooltip/actualite.gif" alt="Tooltip GIF"
+                                class="object-cover w-24 h-24">
+                        </div>
+                    </li>
+                    <li class="relative group z-10">
+                        <a>Qui sommes-nous</a>
+                        <div
+                            class="absolute hidden group-hover:flex tooltip tooltip-bottom p-2 bg-base-200 rounded top-9">
+                            <img src="https://www.escaleasbl.be/images/tooltip/actualite.gif" alt="Tooltip GIF"
+                                class="object-cover w-24 h-24">
+                        </div>
+                    </li>
+                    <li class="relative group group-sport z-10">
+                        <div
+                            class="absolute hidden group-hover:flex tooltip tooltip-bottom p-2 bg-base-200 rounded top-9">
+                            <img src="https://www.escaleasbl.be/images/tooltip/actualite.gif" alt="Tooltip GIF"
+                                class="object-cover w-24 h-24">
+                        </div>
+                        <details id="sportsDetails">
+                            <summary>Sports</summary>
+                            <ul class="bg-base-100 rounded-t-none p-2 z-10">
+                                <li><a>Équipes</a></li>
+                                <li><a>Inscription</a></li>
                             </ul>
                         </details>
                     </li>
-                    <li><a>Link</a></li>
-                    <li><a>Link</a></li>
-
+                    <li class="relative group z-10">
+                        <a>Archives</a>
+                        <div
+                            class="absolute hidden group-hover:flex tooltip tooltip-bottom p-2 bg-base-200 rounded top-9">
+                            <img src="https://www.escaleasbl.be/images/tooltip/actualite.gif" alt="Tooltip GIF"
+                                class="object-cover w-24 h-24">
+                        </div>
+                    </li>
+                    <li class="relative group z-10">
+                        <a>Contact</a>
+                        <div
+                            class="absolute hidden group-hover:flex tooltip tooltip-bottom p-2 bg-base-200 rounded top-9">
+                            <img src="https://www.escaleasbl.be/images/tooltip/actualite.gif" alt="Tooltip GIF"
+                                class="object-cover w-24 h-24">
+                        </div>
+                    </li>
                 </ul>
                 <label class="swap swap-rotate">
                     <input type="checkbox" class="theme-controller hidden" id="themeSwitcher" />
@@ -68,38 +100,38 @@
         <!-- Mobile dropdown menu -->
         <div id="mobileMenu" class="hidden lg:hidden">
             <ul class="menu bg-base-100 p-2">
-                <li><a>Link</a></li>
-                <li><a>Link</a></li>
+                <li><a>Accueil</a></li>
+                <li><a>Qui sommes-nous</a></li>
                 <li>
                     <details>
-                        <summary>Parent</summary>
+                        <summary>Sports</summary>
                         <ul class="bg-base-100 rounded-t-none p-2">
-                            <li><a>Link 1</a></li>
-                            <li><a>Link 2</a></li>
+                            <li><a>Détails des équipes</a></li>
+                            <li><a>Formularie d'inscription</a></li>
                         </ul>
                     </details>
                 </li>
-                <li><a>Link</a></li>
-                <li><a>Link</a></li>
+                <li><a>Archives</a></li>
+                <li><a>Contact</a></li>
             </ul>
         </div>
 
         <div class="hero min-h-screen relative">
             <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover filte brightness-50">
-              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-              Your browser does not support the video tag.
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
             <div class="hero-content text-neutral-content text-center relative z-10">
-              <div class="max-w-md">
-                <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-                <p class="mb-5">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                  quasi. In deleniti eaque aut repudiandae et a id nisi.
-                </p>
-                <button class="btn btn-primary">Get Started</button>
-              </div>
+                <div class="max-w-md">
+                    <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
+                    <p class="mb-5">
+                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+                        quasi. In deleniti eaque aut repudiandae et a id nisi.
+                    </p>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
             </div>
-          </div>
+        </div>
 
 
 
@@ -158,14 +190,13 @@
             </div>
         </div> --}}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 mt-6 gap-4"
-        x-data
-        x-intersect:enter="$el.querySelectorAll('.grid-item').forEach((item, i) => {
-          item.style.animationDelay = `${i * 1.0}s`;
+        <div class="grid grid-cols-1 md:grid-cols-2 mt-6 gap-4" x-data
+            x-intersect:enter="$el.querySelectorAll('.grid-item').forEach((item, i) => {
+          item.style.animationDelay = `${i * 0.2}s`;
           item.classList.add('animate-fade-in');
         })">
 
-     <div class="hero bg-base-200 grid-item">
+            <div class="hero bg-base-200 grid-item">
                 <div class="hero-content flex-col lg:flex-row">
                     <img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
                         class="max-w-sm rounded-lg shadow-2xl" />
@@ -197,10 +228,9 @@
 
         </div>
 
-        <div class="flex flex-wrap justify-center gap-3 mt-6"
-        x-data
-        x-intersect:enter="$el.querySelectorAll('.grid-item').forEach((item, i) => {
-          item.style.animationDelay = `${i * 0.5}s`;
+        <div class="flex flex-wrap justify-center gap-3 mt-6" x-data
+            x-intersect:enter="$el.querySelectorAll('.grid-item').forEach((item, i) => {
+          item.style.animationDelay = `${i * 0.2}s`;
           item.classList.add('animate-fade-in');
         })">
             <div class="grid-item">
@@ -295,24 +325,67 @@
             </div>
         </div>
 
-        <div class="flex flex-col  py-8">
-            <div class="drawer justify-center">
-                <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-                <div class="drawer-content">
-                    <!-- Page content here -->
-                    <label for="my-drawer" class="btn btn-primary drawer-button">Open drawer</label>
-                </div>
-                <div class="drawer-side">
-                    <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-                    <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                        <!-- Sidebar content here -->
-                        <li><a>Sidebar Item 1</a></li>
-                        <li><a>Sidebar Item 2</a></li>
-                    </ul>
+
+
+        <div class="hero bg-base-200 shadow-xl mt-6">
+            <div class="hero-content flex-col 2 lg:flex-row-reverse">
+                <img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+                    class="max-w-sm rounded-lg shadow-2xl" />
+                <div>
+                    <h1 class="text-5xl font-bold">Box Office News!</h1>
+                    <div class="py-6 w-80">
+                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+                        quasi. In deleniti eaque aut repudiandae et a id nisi.
+                    </div>
+                    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+                    <div class="drawer-content">
+                        <!-- Page content here -->
+                        <label for="my-drawer" class="btn btn-primary drawer-button">Mérites
+                            professionnels</label>
+                    </div>
+                    <div class="drawer-side">
+                        <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+                        <ul
+                            class="menu bg-base-200 text-base-content min-h-full w-80 p-4 overflow-y-auto max-h-screen">
+                            <!-- Sidebar content here -->
+                            <li><a>Sidebar Item 1</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                            <li><a>Sidebar Item 2</a></li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <footer class="footer footer-center bg-primary text-primary-content p-10">
+
+
+
+
+
+        <footer class="footer footer-center bg-primary text-primary-content p-10 mt-6">
             <aside>
                 <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                     fill-rule="evenodd" clip-rule="evenodd" class="inline-block fill-current">
@@ -330,16 +403,24 @@
             <nav>
                 <div class="grid grid-flow-col gap-4">
                     <a class="">
-                        <svg class="w-8 h-8 text-gray-800 dark:text-white hover:text-blue-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/>
-                          </svg>
+                        <svg class="w-8 h-8 text-gray-800 dark:text-white hover:text-blue-700" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
+                                clip-rule="evenodd" />
+                        </svg>
 
 
                     </a>
                     <a>
-                        <svg class="w-8 h-8 text-gray-800 dark:text-white hover:text-red-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/>
-                          </svg>
+                        <svg class="w-8 h-8 text-gray-800 dark:text-white hover:text-red-700" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
 
                     </a>
                 </div>
@@ -348,22 +429,30 @@
 
 
         <script>
+            // Function to change the theme
             function changeTheme(themeName) {
                 document.documentElement.setAttribute('data-theme', themeName);
+                localStorage.setItem('theme', themeName); // Save the theme in localStorage
             }
+
+            // Load the theme from localStorage when the page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                const savedTheme = localStorage.getItem('theme') ||
+                    'cupcake'; // Default to 'cupcake' if no theme is saved
+                changeTheme(savedTheme);
+            });
 
             // Example: Switch between light and dark themes
             document.getElementById('themeSwitcher').addEventListener('click', function() {
                 const currentTheme = document.documentElement.getAttribute('data-theme');
-                console.log(currentTheme);
+
                 if (currentTheme === 'cupcake') {
                     changeTheme('retro');
                 } else {
                     changeTheme('cupcake');
                 }
             });
-        </script>
-        <script>
+
             document.addEventListener('alpine:init', () => {
                 Alpine.data('carousel', () => ({
                     currentSlide: 1,
@@ -392,6 +481,17 @@
             document.getElementById('menuToggle').addEventListener('click', function() {
                 const mobileMenu = document.getElementById('mobileMenu');
                 mobileMenu.classList.toggle('hidden');
+            });
+
+
+            const detailsElement = document.getElementById('sportsDetails');
+             console.log(detailsElement);
+            // Close details when mouse leaves the group
+            document.querySelector('.group-sport').addEventListener('mouseleave', () => {
+
+                if (detailsElement.open) {
+                    detailsElement.removeAttribute('open');
+                }
             });
         </script>
 
