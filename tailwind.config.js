@@ -23,7 +23,7 @@ export default {
           {
             cupcake: {
                 ...require("daisyui/src/theming/themes")["light"],
-                primary: "#737373",
+                primary: "#3A3A3A",
 
               },
           },
