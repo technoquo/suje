@@ -10,7 +10,8 @@
     <!-- Fonts -->
 
 
-
+      <!-- Load Glide CSS directly -->
+     <link rel="stylesheet" href="{{ asset('css/glide.core.min.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
@@ -147,7 +148,7 @@
 
 
 
-        <div x-data="carousel" x-init="startCarousel()" class="carousel w-full overflow-hidden relative mt-6">
+        {{-- <div x-data="carousel" x-init="startCarousel()" class="carousel w-full overflow-hidden relative mt-6">
             <div class="relative flex w-[400%] transition-transform duration-700"
                 :style="`transform: translateX(-${(currentSlide - 1) * 100}%)`">
 
@@ -181,10 +182,99 @@
                 <button @click="prevSlide()" class="btn btn-circle">❮</button>
                 <button @click="nextSlide()" class="btn btn-circle">❯</button>
             </div>
+        </div> --}}
+
+
+        <div class="mt-6" x-data="{
+                init() {
+                    new Glide(this.$refs.glide, {
+                        perView: 3,
+                        autoplay: 3000,
+                        breakpoints: {
+                            640: {
+                                perView: 1,
+                            },
+                        },
+                    }).mount()
+                },
+            }">
+            <div x-ref="glide" class="glide block relative px-12">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        <li class="glide__slide flex flex-col items-center justify-center pb-6">
+                            <img class="w-full" src="https://picsum.photos/800/400?random=1" alt="placeholder image">
+                        </li>
+
+                        <li class="glide__slide flex flex-col items-center justify-center pb-6">
+                            <img class="w-full" src="https://picsum.photos/800/400?random=2" alt="placeholder image">
+                        </li>
+
+                        <li class="glide__slide flex flex-col items-center justify-center pb-6">
+                            <img class="w-full" src="https://picsum.photos/800/400?random=3" alt="placeholder image">
+                        </li>
+
+                        <li class="glide__slide flex flex-col items-center justify-center pb-6">
+                            <img class="w-full" src="https://picsum.photos/800/400?random=4" alt="placeholder image">
+                        </li>
+
+                        <li class="glide__slide flex flex-col items-center justify-center pb-6">
+                            <img class="w-full" src="https://picsum.photos/800/400?random=5" alt="placeholder image">
+                        </li>
+
+                        <li class="glide__slide flex flex-col items-center justify-center pb-6">
+                            <img class="w-full" src="https://picsum.photos/800/400?random=6" alt="placeholder image">
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glide__arrows pointer-events-none absolute inset-0 flex items-center justify-between"
+                    data-glide-el="controls">
+                    <!-- Previous Button -->
+                    <button
+                        class="glide__arrow glide__arrow--left pointer-events-auto disabled:opacity-50 rounded-lg border border-gray-200 p-1 inline-flex items-center justify-center"
+                        data-glide-dir="<">
+                        <span aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-600">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 19.5 8.25 12l7.5-7.5" />
+                            </svg>
+                        </span>
+                        <span class="sr-only">Skip to previous slide page</span>
+                    </button>
+
+                    <!-- Next Button -->
+                    <button
+                        class="glide__arrow glide__arrow--left pointer-events-auto disabled:opacity-50 rounded-lg border border-gray-200 p-1 inline-flex items-center justify-center"
+                        data-glide-dir=">">
+                        <span aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-600">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </span>
+                        <span class="sr-only">Skip to next slide page</span>
+                    </button>
+                </div>
+
+                <!-- Bullets -->
+                <div class="glide__bullets flex w-full items-center justify-center gap-1"
+                    data-glide-el="controls[nav]">
+                    <button class="glide__bullet h-3 w-3 rounded-full bg-gray-200 transition-colors"
+                        data-glide-dir="=0"></button>
+                    <button class="glide__bullet h-3 w-3 rounded-full bg-gray-200 transition-colors"
+                        data-glide-dir="=1"></button>
+                    <button class="glide__bullet h-3 w-3 rounded-full bg-gray-200 transition-colors"
+                        data-glide-dir="=2"></button>
+                    <button class="glide__bullet h-3 w-3 rounded-full bg-gray-200 transition-colors"
+                        data-glide-dir="=3"></button>
+                    <button class="glide__bullet h-3 w-3 rounded-full bg-gray-200 transition-colors"
+                        data-glide-dir="=4"></button>
+                    <button class="glide__bullet h-3 w-3 rounded-full bg-gray-200 transition-colors"
+                        data-glide-dir="=5"></button>
+                </div>
+            </div>
         </div>
-
-
-
 
 
 
@@ -550,11 +640,11 @@
         </div>
 
         <div class="mt-12">
-            <h1 class="text-2xl font-bold text-center">Les activités et  événements</h1>
+            <h1 class="text-2xl font-bold text-center">Les activités et événements</h1>
 
             <div class="flex flex-wrap justify-center gap-3 mt-6" x-data
                 x-intersect:enter="$el.querySelectorAll('.grid-item').forEach((item, i) => {
-                item.style.animationDelay = `${i * 0.2}s`;suje
+                item.style.animationDelay = `${i * 0.2}s`
                 item.classList.add('animate-fade-in');
                 })">
                 <div class="grid-item">
@@ -655,14 +745,11 @@
         <div class="hero bg-base-200 shadow-xl mt-6">
             <div class="hero-content flex-col 2 lg:flex-row-reverse">
                 <div x-data="imageRotator()" class="max-w-sm rounded-lg shadow-2xl">
-                    <img
-                      :src="currentImage"
-                      alt="Rotating Image"
-                      class="w-full rounded-lg transition-opacity duration-500 ease-in-out"
-                      :class="{ 'opacity-0': fadingOut, 'opacity-100': !fadingOut }"
-                      @transitionend="fadingOut = false"
-                    />
-                  </div>
+                    <img :src="currentImage" alt="Rotating Image"
+                        class="w-full rounded-lg transition-opacity duration-500 ease-in-out"
+                        :class="{ 'opacity-0': fadingOut, 'opacity-100': !fadingOut }"
+                        @transitionend="fadingOut = false" />
+                </div>
                 <div>
                     <h1 class="text-2xl font-bold">Connaître les mérites professionnels</h1>
                     <div class="py-6 w-80">
@@ -681,20 +768,29 @@
                             class="menu bg-base-200 text-base-content min-h-full w-80 p-4 overflow-y-auto max-h-screen">
                             <!-- Sidebar content here -->
                             <li><a><img src="/img/1-photo.png" class="w-24 h-24"
+                                        class="max-w-sm rounded-lg shadow-2xl" alt="Photo 1" tooltip="dddd" /></a>
+                            </li>
+                            <li><a><img src="/img/2-photo.png" class="w-24 h-24"
                                         class="max-w-sm rounded-lg shadow-2xl" /></a></li>
-                            <li><a><img src="/img/1-photo.png" class="w-24 h-24"
+                            <li><a><img src="/img/3-photo.png" class="w-24 h-24"
                                         class="max-w-sm rounded-lg shadow-2xl" /></a></li>
-                            <li><a><img src="/img/1-photo.png" class="w-24 h-24"
+                            <li><a><img src="/img/4-photo.png" class="w-24 h-24"
                                         class="max-w-sm rounded-lg shadow-2xl" /></a></li>
-                            <li><a><img src="/img/1-photo.png" class="w-24 h-24"
+                            <li><a><img src="/img/5-photo.png" class="w-24 h-24"
                                         class="max-w-sm rounded-lg shadow-2xl" /></a></li>
-                            <li><a><img src="/img/1-photo.png" class="w-24 h-24"
+                            <li><a><img src="/img/6-photo.png" class="w-24 h-24"
                                         class="max-w-sm rounded-lg shadow-2xl" /></a></li>
-                            <li><a><img src="/img/1-photo.png" class="w-24 h-24"
+                            <li><a><img src="/img/7-photo.png" class="w-24 h-24"
                                         class="max-w-sm rounded-lg shadow-2xl" /></a></li>
-                            <li><a><img src="/img/1-photo.png" class="w-24 h-24"
+                            <li><a><img src="/img/8-photo.png" class="w-24 h-24"
                                         class="max-w-sm rounded-lg shadow-2xl" /></a></li>
-                            <li><a><img src="/img/1-photo.png" class="w-24 h-24"
+                            <li><a><img src="/img/9-photo.png" class="w-24 h-24"
+                                        class="max-w-sm rounded-lg shadow-2xl" /></a></li>
+                            <li><a><img src="/img/10-photo.png" class="w-24 h-24"
+                                        class="max-w-sm rounded-lg shadow-2xl" /></a></li>
+                            <li><a><img src="/img/11-photo.png" class="w-24 h-24"
+                                        class="max-w-sm rounded-lg shadow-2xl" /></a></li>
+                            <li><a><img src="/img/12-photo.png" class="w-24 h-24"
                                         class="max-w-sm rounded-lg shadow-2xl" /></a></li>
 
                         </ul>
@@ -763,8 +859,14 @@
                 const currentTheme = document.documentElement.getAttribute('data-theme');
 
                 if (currentTheme === 'cupcake') {
+                    document.querySelectorAll('.glide__arrow').forEach(arrow => {
+                    arrow.classList.replace('border-gray-200', 'border-indigo-500/100');
+                    });
                     changeTheme('retro');
                 } else {
+                    document.querySelectorAll('.glide__arrow').forEach(arrow => {
+                    arrow.classList.replace('border-indigo-500', 'border-gray-500');
+                    });
                     changeTheme('cupcake');
                 }
             });
@@ -811,29 +913,44 @@
             });
 
             function imageRotator() {
-    return {
-      images: [
-        '/img/1-photo.png',
-        '/img/2-photo.png',
-      ],
-      currentImage: '/img/1-photo.png',
-      fadingOut: false,
-      init() {
-        this.startRotation();
-      },
-      startRotation() {
-        setInterval(() => {
-          this.fadingOut = true; // Start fade out
-          setTimeout(() => {
-            this.currentImage = this.images[Math.floor(Math.random() * this.images.length)];
-            this.fadingOut = false; // Fade back in
-          }, 500); // Match the fade-out duration
-        }, 2000); // Change image every 5 seconds
-      }
-    };
-  }
+                return {
+                    images: [
+                        '/img/1-photo.png',
+                        '/img/2-photo.png',
+                        '/img/3-photo.png',
+                        '/img/4-photo.png',
+                        '/img/5-photo.png',
+                        '/img/6-photo.png',
+                        '/img/7-photo.png',
+                        '/img/8-photo.png',
+                        '/img/9-photo.png',
+                        '/img/10-photo.png',
+                        '/img/11-photo.png',
+                        '/img/12-photo.png',
+
+                    ],
+                    currentImage: '/img/1-photo.png',
+                    fadingOut: false,
+                    init() {
+                        this.startRotation();
+                    },
+                    startRotation() {
+                        setInterval(() => {
+                            this.fadingOut = true; // Start fade out
+                            setTimeout(() => {
+                                this.currentImage = this.images[Math.floor(Math.random() * this.images.length)];
+                                this.fadingOut = false; // Fade back in
+                            }, 500); // Match the fade-out duration
+                        }, 2000); // Change image every 5 seconds
+                    }
+                };
+            }
         </script>
         <script async src="//www.instagram.com/embed.js"></script>
+
+
+
+
 </body>
 
 </html>
