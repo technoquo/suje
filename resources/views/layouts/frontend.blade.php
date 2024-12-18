@@ -82,7 +82,7 @@
                     </div>
                 </li>
                 <li class="relative group z-10">
-                    <a>Contact</a>
+                    <a href="{{ route('contact') }}">Contact</a>
                     <div
                         class="absolute hidden group-hover:flex tooltip tooltip-bottom p-2 bg-base-200 rounded top-9">
                         <img src="https://www.escaleasbl.be/images/tooltip/actualite.gif" alt="Tooltip GIF"
@@ -108,8 +108,8 @@
       <!-- Mobile dropdown menu -->
       <div id="mobileMenu" class="hidden lg:hidden">
         <ul class="menu bg-base-100 p-2">
-            <li><a>Accueil</a></li>
-            <li><a>Qui sommes-nous</a></li>
+            <li><a href="{{ route('home') }}">Accueil</a></li>
+            <li><a href="{{ route('sommes-nous') }}">Qui sommes-nous</a></li>
             <li>
                 <details>
                     <summary>Sports</summary>
@@ -121,7 +121,7 @@
             </li>
             <li><a>Archives</a></li>
             <li><a>Location</a></li>
-            <li><a>Contact</a></li>
+            <li><a href="{{ route('contact') }}">Contact</a></li>
         </ul>
     </div>
 
