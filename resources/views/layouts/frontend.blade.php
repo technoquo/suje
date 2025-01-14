@@ -60,7 +60,7 @@
                     <details id="sportsDetails">
                         <summary>Sports</summary>
                         <ul class="bg-base-100 rounded-t-none p-2 z-10">
-                            <li><a>Équipes</a></li>
+                            <li><a href="{{route('equipes')}}">Équipes</a></li>
                             <li><a>Inscription</a></li>
                         </ul>
                     </details>
@@ -114,7 +114,7 @@
                 <details>
                     <summary>Sports</summary>
                     <ul class="bg-base-100 rounded-t-none p-2">
-                        <li><a>Détails des équipes</a></li>
+                        <li><a class="{{route('equipes')}}">Détails des équipes</a></li>
                         <li><a>Formularie d'inscription</a></li>
                     </ul>
                 </details>

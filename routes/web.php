@@ -10,6 +10,11 @@ Route::get('/sommes-nous', function () {
     return view('sommes-nous');
 })->name('sommes-nous');
 
+Route::get('/equipes', function () {
+    return view('equipes');
+})->name('equipes');
+
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
