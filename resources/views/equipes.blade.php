@@ -6,13 +6,14 @@
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
 
         <div class="grid md:grid-cols-2 gap-8">
-            <a href="#">
-                <div class="bg-blue-600 rounded-lg p-8 md:p-12">
+
+                <div class="bg-blue-500 rounded-lg p-8 md:p-12">
                     <h2 class="text-white  text-3xl font-extrabold mb-2">L.F.F.S</h2>
-                    <p class="text-lg font-normal text-yellow-500 dark:text-yellow-400 mb-4">Ligue Francophone de
+                    <p class="text-lg font-normal text-yellow-400 dark:text-yellow-200 mb-4">Ligue Francophone de
                         Football en Salle</p>
-                        <div class="flex items-center space-x-8">
-                            <div>
+                        <div class="flex  space-x-8 bg-white p-9 rounded-lg justify-center ">
+                            <div class="text-xl font-bold text-blue-500 text-center">
+                                <button onclick="my_modal_1.showModal()">
                                 <svg fill="#000000" width="64px" height="64px" viewBox="0 0 50 50"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -23,18 +24,60 @@
                                             transform="translate(-41 -25)"></path>
                                     </g>
                                 </svg>
-                            </div>                            
-                       </div>
+                                  FUTSAL
+                                </button>
+                                <dialog id="my_modal_1" class="modal fixed inset-0">
+                                    <div class="modal-box overflow-y-auto max-h-[90vh] md:w-11/12 md:max-w-5xl">
+                                        <h1 class="mb-4">L.F.F.S - FUTSAL</h1>
+                                        <div class="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-4">
+                                            <div class="card bg-blue-500 text-yellow-200 w-96">
+                                                <div class="card-body items-center text-center">
+                                                    <h2 class="card-title">Dames</h2>
+                                                    <p>(2ème division)</p>
+                                                    <div class="card-actions">
+                                                        <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-blue-500 text-yellow-200 w-96">
+                                                <div class="card-body items-center text-center">
+                                                    <h2 class="card-title">Vétérans 1</h2>
+                                                    <p>(2ème Division)</p>
+                                                    <div class="card-actions">
+                                                        <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-blue-500 text-yellow-200 w-96">
+                                                <div class="card-body items-center text-center">
+                                                    <h2 class="card-title">Vétérans 2</h2>
+                                                    <p>(3ème Division)</p>
+                                                    <div class="card-actions">
+                                                        <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form method="dialog" class="modal-backdrop">
+                                        <button>close</button>
+                                    </form>
+                                </dialog>
+                            </div>
+
+
+                        </div>
                 </div>
-            </a>
-            <div class="bg-blue-600 rounded-lg p-8 md:p-12">
-                <a href="#">
+
+            <div class=" bg-blue-500 rounded-lg p-8 md:p-12">
+
                     <h2 class="text-white text-3xl font-extrabold mb-2">L.S.F.S</h2>
-                    <p class="text-lg font-normal text-yellow-500 dark:text-yellow-400 mb-4">Ligue Sportive Francophone
+                    <p class="text-lg font-normal text-yellow-400 dark:text-yellow-200 mb-4">Ligue Sportive Francophone
                         des Sourds</p>
-               
-                <div class="flex items-center space-x-8">
-                        <div>
+
+                    <div class="flex  space-x-8 bg-white p-9 rounded-lg justify-center">
+                        <div class="text-xl font-bold text-blue-500 text-center">
+                            <button onclick="my_modal_2.showModal()">
                             <svg fill="#000000" width="64px" height="64px" viewBox="0 0 50 50"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -45,9 +88,49 @@
                                         transform="translate(-41 -25)"></path>
                                 </g>
                             </svg>
+                            FUTSAL
+                            </button>
+                            <dialog id="my_modal_2" class="modal fixed inset-0">
+                                <div class="modal-box overflow-y-auto max-h-[90vh] md:w-11/12 md:max-w-5xl">
+                                    <h1 class="mb-4">L.S.F.S - FUTSAL</h1>
+                                    <div class="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-4">
+                                        <div class="card bg-blue-500 text-yellow-200 w-96">
+                                            <div class="card-body items-center text-center">
+                                                <h2 class="card-title">Dames</h2>
+
+                                                <div class="card-actions">
+                                                    <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card bg-blue-500 text-yellow-200 w-96">
+                                            <div class="card-body items-center text-center">
+                                                <h2 class="card-title">Vétérans</h2>
+
+                                                <div class="card-actions">
+                                                    <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card bg-blue-500 text-yellow-200 w-96">
+                                            <div class="card-body items-center text-center">
+                                                <h2 class="card-title">Juniors (U9 à U17)</h2>
+
+                                                <div class="card-actions">
+                                                    <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form method="dialog" class="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </dialog>
                         </div>
-                        <div>
-                            <svg fill="#000000" height="64px" width="64px" version="1.1" id="Capa_1"
+                        <div class="text-xl font-bold text-blue-500 text-center">
+                            <button onclick="my_modal_3.showModal()">
+                            <svg fill="#000000" height="64px" width="64px" id="Capa_1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 viewBox="0 0 111.441 111.441" xml:space="preserve">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -66,11 +149,32 @@
                                     </g>
                                 </g>
                             </svg>
+                            PADEL
+                            </button>
+                            <dialog id="my_modal_3" class="modal fixed inset-0">
+                                <div class="modal-box overflow-y-auto max-h-[90vh] md:w-11/12 md:max-w-5xl">
+                                    <h1 class="mb-4">L.S.F.S - PADEL</h1>
+                                    <div class="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-4">
+                                        <div class="card bg-blue-500 text-yellow-200 w-96">
+                                            <div class="card-body items-center text-center">
+                                                <h2 class="card-title">Homes</h2>
+
+                                                <div class="card-actions">
+                                                    <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form method="dialog" class="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </dialog>
                         </div>
                </div>
-            </a>
             </div>
         </div>
+
     </div>
 </section>
 

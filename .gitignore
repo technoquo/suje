@@ -2,11 +2,12 @@
 /node_modules
 # /public/build
 /public/storage
+/public/hot
 #/public/img/
 /storage/*.key
 /storage/pail
 /vendor
-#.env
+.env
 .env.backup
 .env.production
 .phpactor.json
