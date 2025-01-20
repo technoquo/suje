@@ -4,7 +4,6 @@
 
 <section class="bg-base-200 mt-8">
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
-
         <div class="grid md:grid-cols-2 gap-8">
 
                 <div class="bg-blue-500 rounded-lg p-8 md:p-12">

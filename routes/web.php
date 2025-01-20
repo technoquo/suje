@@ -19,7 +19,6 @@ Route::get('/equipes/details', function () {
     return view('details');
 })->name('details');
 
-
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
