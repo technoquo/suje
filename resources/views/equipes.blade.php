@@ -35,7 +35,7 @@
                                                     <h2 class="card-title">Dames</h2>
                                                     <p>(2ème division)</p>
                                                     <div class="card-actions">
-                                                        <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                        <a href="{{route('details')}}" class="btn btn-primary mt-4">Voir plus de détails</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -44,7 +44,7 @@
                                                     <h2 class="card-title">Vétérans 1</h2>
                                                     <p>(2ème Division)</p>
                                                     <div class="card-actions">
-                                                        <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                        <a href="{{route('details')}}" class="btn btn-primary mt-4">Voir plus de détails</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,7 +53,7 @@
                                                     <h2 class="card-title">Vétérans 2</h2>
                                                     <p>(3ème Division)</p>
                                                     <div class="card-actions">
-                                                        <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                        <a href="{{route('details')}}" class="btn btn-primary mt-4">Voir plus de détails</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,7 +99,7 @@
                                                 <h2 class="card-title">Dames</h2>
 
                                                 <div class="card-actions">
-                                                    <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                    <a href="{{route('details')}}" class="btn btn-primary mt-4">Voir plus de détails</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,7 +108,7 @@
                                                 <h2 class="card-title">Vétérans</h2>
 
                                                 <div class="card-actions">
-                                                    <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                    <a href="{{route('details')}}" class="btn btn-primary mt-4">Voir plus de détails</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,7 +117,7 @@
                                                 <h2 class="card-title">Juniors (U9 à U17)</h2>
 
                                                 <div class="card-actions">
-                                                    <button class="btn btn-primary mt-4">Voir plus de détails</button>
+                                                    <a href="{{route('details')}}" class="btn btn-primary mt-4">Voir plus de détails</a>
                                                 </div>
                                             </div>
                                         </div>

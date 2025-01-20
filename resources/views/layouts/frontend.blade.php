@@ -61,7 +61,7 @@
                         <summary>Sports</summary>
                         <ul class="bg-base-100 rounded-t-none p-2 z-10">
                             <li><a href="{{route('equipes')}}">Équipes</a></li>
-                            <li><a>Inscription</a></li>
+                            <li><a href="https://www.google.be" target="_blank">Inscription</a></li>
                         </ul>
                     </details>
                 </li>

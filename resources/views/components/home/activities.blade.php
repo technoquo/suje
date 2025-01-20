@@ -16,7 +16,7 @@
                     <h2 class="card-title">Sunt ad ad consequat </h2>
                     <p>Mollit mollit aliqua tempor officia magna laborum ea non</p>
                     <div class="card-actions">
-                        <button class="btn btn-primary">Plus d'informations</button>
+                        <a href="{{route('details')}}" class="btn btn-primary">Plus d'informations</a>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     <h2 class="card-title">Sunt ad ad consequat </h2>
                     <p>Mollit mollit aliqua tempor officia magna laborum ea non</p>
                     <div class="card-actions">
-                        <button class="btn btn-primary">Plus d'informations</button>
+                        <a href="{{route('details')}}" class="btn btn-primary">Plus d'informations</a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <h2 class="card-title">Sunt ad ad consequat </h2>
                     <p>Mollit mollit aliqua tempor officia magna laborum ea non</p>
                     <div class="card-actions">
-                        <button class="btn btn-primary">Plus d'informations</button>
+                        <a href="{{route('details')}}" class="btn btn-primary">Plus d'informations</a>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     <h2 class="card-title">Sunt ad ad consequat </h2>
                     <p>Mollit mollit aliqua tempor officia magna laborum ea non</p>
                     <div class="card-actions">
-                        <button class="btn btn-primary">Plus d'informations</button>
+                        <a href="{{route('details')}}" class="btn btn-primary">Plus d'informations</a>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                     <h2 class="card-title">Sunt ad ad consequat </h2>
                     <p>Mollit mollit aliqua tempor officia magna laborum ea non</p>
                     <div class="card-actions">
-                        <button class="btn btn-primary">Plus d'informations</button>
+                        <a href="{{route('details')}}" class="btn btn-primary">Plus d'informations</a>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                     <h2 class="card-title">Sunt ad ad consequat </h2>
                     <p>Mollit mollit aliqua tempor officia magna laborum ea non</p>
                     <div class="card-actions">
-                        <button class="btn btn-primary">Plus d'informations</button>
+                        <a href="{{route('details')}}" class="btn btn-primary">Plus d'informations</a>
                     </div>
                 </div>
             </div>

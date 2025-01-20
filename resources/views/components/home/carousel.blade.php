@@ -24,7 +24,7 @@
                 <div class="carousel-item w-full">
                     <img src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
                         class="w-full" />
-                </div>
+ven                </div>
             </div>
 
             <!-- Navigation buttons -->
@@ -48,11 +48,14 @@
                 }).mount()
             },
         }">
+        <div class="flex justify-center items-center w-full h-16 text-4xl mb-6">
+        <h1>Galerie de la demiere activite</h1>
+        </div>
         <div x-ref="glide" class="glide block relative px-12">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide flex flex-col items-center justify-center pb-6">
-                        <img class="w-full" src="https://picsum.photos/800/400?random=1" alt="placeholder image">
+                       <img class="w-full" src="https://picsum.photos/800/400?random=1" alt="placeholder image">
                     </li>
 
                     <li class="glide__slide flex flex-col items-center justify-center pb-6">
@@ -60,7 +63,7 @@
                     </li>
 
                     <li class="glide__slide flex flex-col items-center justify-center pb-6">
-                        <img class="w-full" src="https://picsum.photos/800/400?random=3" alt="placeholder image">
+                       <img class="w-full" src="https://picsum.photos/800/400?random=3" alt="placeholder image">
                     </li>
 
                     <li class="glide__slide flex flex-col items-center justify-center pb-6">
@@ -68,7 +71,7 @@
                     </li>
 
                     <li class="glide__slide flex flex-col items-center justify-center pb-6">
-                        <img class="w-full" src="https://picsum.photos/800/400?random=5" alt="placeholder image">
+                       <img class="w-full" src="https://picsum.photos/800/400?random=5" alt="placeholder image">
                     </li>
 
                     <li class="glide__slide flex flex-col items-center justify-center pb-6">
