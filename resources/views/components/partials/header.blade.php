@@ -56,7 +56,7 @@
                         <ul class="a" :class="{ 'tc': dropdown }">
                             <li><a href="{{route('blog.all')}}" class="xl" :class="{ 'mk': page === 'blog-grid' }">Blog</a></li>
                             <li><a href="{{route('professional')}}" class="xl" :class="{ 'mk': page === 'blog-single' }">Métiers</a></li>
-                            <li><a href="" class="xl" :class="{ 'mk': page === 'signin' }">Location</a></li>
+                            <li><a href="{{route('location.index')}}" class="xl" :class="{ 'mk': page === 'signin' }">Location</a></li>
                             <li><a href="{{route('activities.all')}}" class="xl" :class="{ 'mk': page === 'signup' }">Evénements</a></li>
 {{--                            <li><a href="404.html" class="xl" :class="{ 'mk': page === '404' }">404</a></li>--}}
                         </ul>

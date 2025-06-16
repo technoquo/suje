@@ -13,5 +13,5 @@ Route::get('/activities',[ \App\Http\Controllers\SportController::class, 'all' ]
 Route::post('/activities/recherche', [ \App\Http\Controllers\SportController::class, 'search' ])->name('activities.search');
 Route::get('/activities/{slug}/{sport}/{group}', [ \App\Http\Controllers\SportController::class, 'activities' ])->name('sport.activities');;
 Route::get('/professionals', [ \App\Http\Controllers\ProfessionalController::class, 'index' ])->name('professional');
-
+Route ::get('/location', [ \App\Http\Controllers\LocationController::class, 'index' ])->name('location.index');
 
