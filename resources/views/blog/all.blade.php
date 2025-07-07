@@ -21,9 +21,6 @@
     @livewireStyles
     @stack('styles')
 </head>
-<!-- ===== Header Start ===== -->
-<x-partials.header :heroes="$heroes"/>
-<!-- ===== Header End ===== -->
 <body
     x-data="{ page: 'home', 'darkMode': false, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
     x-init="
@@ -31,11 +28,16 @@
          $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
     :class="{'b eh': darkMode === false}"
 >
+<!-- ===== Header Start ===== -->
+<x-partials.header :heroes="$heroes"/>
+<!-- ===== Header End ===== -->
+
 <!-- ===== Blog Start ===== -->
 <section class="ji gp uq">
     <!-- Section Title Start -->
     <div
         x-data="{ sectionTitle: `Tous les blogs`}"
+        class="bb ye ki xn vq jb jo"
     >
 
         <div class="animate_top bb ze rj ki xn vq">

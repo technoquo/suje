@@ -21,9 +21,6 @@
     @livewireStyles
     @stack('styles')
 </head>
-<!-- ===== Header Start ===== -->
-<x-partials.header :heroes="$heroes"/>
-<!-- ===== Header End ===== -->
 <body
     x-data="{ page: 'home', 'darkMode': false, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
     x-init="
@@ -31,50 +28,96 @@
          $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
     :class="{'b eh': darkMode === false}"
 >
+<!-- ===== Header Start ===== -->
+<x-partials.header :heroes="$heroes"/>
+<!-- ===== Header End ===== -->
+<main>
+<!-- ===== Blog Start ===== -->
+<section class="ji gp uq" >
+    <!-- Section Title Start -->
+    <div
+        x-data="{ sectionTitle: `Tous les produits` }"
+        class="bb ye ki xn vq jb jo"
+    >
 
-<section class="ji gp uq">
-    <div class="bb ze ki xn 2xl:ud-px-0">
-        <div class="flex justify-center mx-auto">
-            <h2 class="fk vj pr kk wm on/5 gq/2 bb _b">
-                Produits disponibles
-            </h2>
+        <div class="animate_top bb ze rj ki xn vq ">
+            <h2
+                x-text="sectionTitle"
+                class="fk vj pr kk wm on/5 gq/2 bb _b"
+            ></h2>
+
         </div>
-        <div class="tc sf yo zf kq">
-            <div class="ro col-span-full">
+        <div class="flex justify-center mx-auto">
+            <form action="{{ route('blog.search') }}" method="POST" class="tc">
+                @csrf
+                <div class="i">
+                    <input
+                        type="text"
+                        placeholder="Rechercher ici..."
+                        class="vd sm _g ch pm vk xm rg gm dm/40 dn/40 li mi"
+                        name="search"
+                    />
 
-
-
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach($products as $product)
-                        <div class="animate_top rounded-md shadow-solid-13 bg-white dark:bg-blacksection border border-stroke dark:border-strokedark p-7.5">
-                            @if($product->image_path)
-                                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}"
-                                     class="w-full h-52 object-cover rounded mb-4">
-                            @endif
-                            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">{{ $product->name }}</h3>
-                            <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">{{ $product->description }}</p>
-                            <ul class="text-sm space-y-1 mb-4">
-                                <li class="text-blue-700 dark:text-blue-300 font-medium">
-                                    Prix : €{{ number_format($product->price_per_day, 2) }} / jour
-                                </li>
-                                <li class="text-gray-500 dark:text-gray-400">
-                                    Stock : {{ $product->stock }}
-                                </li>
-                            </ul>
-                            <a href="#"
-                               class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded transition-colors duration-200">
-                                Louer maintenant
-                            </a>
-                        </div>
-                    @endforeach
+                    <button class="h r q _h">
+                        <svg
+                            class="th ul ml il"
+                            width="21"
+                            height="21"
+                            viewBox="0 0 21 21"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2941 12.5699 16.0029 10.8204 16 9C16 5.132 12.867 2 9 2C5.132 2 2 5.132 2 9C2 12.867 5.132 16 9 16C10.8204 16.0029 12.5699 15.2941 13.875 14.025L14.025 13.875Z"
+                            />
+                        </svg>
+                    </button>
                 </div>
-            </div>
+            </form>
+        </div>
+    </div>
+    <!-- Section Title End -->
+
+    <div class="bb ye ki xn vq jb jo">
+        <div class="wc qf pn xo zf iq">
+            <!-- Blog Item -->
+
+            @foreach($products as $product)
+                <div class="animate_top sg vk rm xm">
+                    <div class="c rc i z-1 pg">
+                        @if($product->image_path)
+                        <img class="w-full" src="{{asset('storage/'. $product->image_path)}}" alt="{{$product->name}}" />
+                        @endif
+
+                    </div>
+
+                    <div class="text-center">
+
+                        <h4 class="ek tj ml il kk wm xl eq lb">
+                            <a  href=""
+                            >{{ $product->name }}</a
+                            >
+                        </h4>
+                    </div>
+                    <p class="ek il wm eq lb">{{ $product->description }}</p>
+                    <ul class="text-sm space-y-1 mb-4">
+                        <li class="">
+                            Prix : €{{ number_format($product->price_per_day, 2) }} / jour
+                        </li>
+                        <li class="wm">
+                            Stock : {{ $product->stock }}
+                        </li>
+                    </ul>
+                    <div class="mb-10 text-center">
+                        <a href="https://suje_laravel.test/blog/lorem-ipsum-sss" class="rg lk gh  ml il gi hi">Louer maintenant</a>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>
-
-
+<!-- ===== Blog End ===== -->
+</main>
 <x-partials.footer :heroes="$heroes"  :socialnetworks="$socialnetworks"/>
 
 <!-- ====== Back To Top Start ===== -->
