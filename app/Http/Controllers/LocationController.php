@@ -23,4 +23,23 @@ class LocationController extends Controller
             'socialnetworks' => $socialnetworks,
         ]);
     }
+
+    public function show($slug)
+    {
+
+        $product = Product::where('slug', $slug)
+                                    ->where('stock', '>', 0)
+                                    ->where('active', 1)
+                                    ->firstOrFail();
+        $heroes = Hero::first();
+        $socialnetworks = SocialNetwork::whereStatus(1)->get();
+
+        // Logic to display a specific location
+        return view('location.show', [
+
+            'heroes' => $heroes,
+            'product' => $product,
+            'socialnetworks' => $socialnetworks,
+        ]);
+    }
 }

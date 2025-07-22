@@ -94,7 +94,7 @@
                     <div class="text-center">
 
                         <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a  href=""
+                            <a href="{{route('location.show', $product->slug)}}"
                             >{{ $product->name }}</a
                             >
                         </h4>
@@ -109,7 +109,7 @@
                         </li>
                     </ul>
                     <div class="mb-10 text-center">
-                        <a href="https://suje_laravel.test/blog/lorem-ipsum-sss" class="rg lk gh  ml il gi hi">Louer maintenant</a>
+                        <a href="{{route('location.show', $product->slug)}}" class="rg lk gh  ml il gi hi">Louer maintenant</a>
                     </div>
                 </div>
             @endforeach

@@ -28,8 +28,16 @@ class ProductResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Nom')
-                    ->required(),
-
+                    ->required()
+                    ->maxLength(255)
+                    ->live(onBlur: true) // Updates the slug as you type or on blur
+                    ->afterStateUpdated(function (callable $set, $state) {
+                        $set('slug', \Illuminate\Support\Str::slug($state));
+                    }),
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->disabled() // Optional: prevents manual editing of the slug
+                    ->dehydrated(true), // Ensures the slug is included in the form submission
                 Forms\Components\Textarea::make('description')
                     ->label('Description'),
 
