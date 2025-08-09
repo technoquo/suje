@@ -21,6 +21,15 @@ class Rental extends Model
         'penalty',
     ];
 
+    protected $casts = [
+        'start_date'  => 'date',
+        'end_date'    => 'date',
+        'return_date' => 'date',
+        'total_price'  => 'decimal:2',
+        'penalty'    => 'decimal:2',
+    ];
+
+
     public function product()
     {
         return $this->belongsTo(Product::class);

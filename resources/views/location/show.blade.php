@@ -9,7 +9,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             lucide.createIcons();
@@ -21,105 +24,194 @@
     @stack('styles')
 </head>
 <body
-    x-data="{ page: 'home', 'darkMode': false, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
-    x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
-            $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
-    :class="{'b eh': darkMode === false}"
+    x-data="{ page: 'home', darkMode: JSON.parse(localStorage.getItem('darkMode')) ?? false, stickyMenu: false, navigationOpen: false, scrollTop: false }"
+    x-init="$watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{ 'dark': darkMode }"
 >
+<style>
+    /* toque dark */
+    :root.dark .flatpickr-calendar {
+        background: #111827; color: #e5e7eb; border-color: #374151;
+    }
+    :root.dark .flatpickr-day {
+        color: #e5e7eb;
+    }
+    :root.dark .flatpickr-day.today {
+        border-color: #3b82f6;
+    }
+    :root.dark .flatpickr-day.selected {
+        background: #2563eb; border-color: #2563eb;
+    }
+</style>
 <!-- ===== Header Start ===== -->
 <x-partials.header :heroes="$heroes"/>
 <!-- ===== Header End ===== -->
+
 <main>
-    <!-- ===== Blog Start ===== -->
     <section class="ji gp uq">
-        <section class="">
-            <div class="bb ze ki xn 2xl:ud-px-0">
-                <div class="tc sf yo zf kq">
-                    <div class="ro">
-                        <div class="animate_top rounded-md shadow-solid-13 bg-white dark:bg-blacksection border border-stroke dark:border-strokedark p-7.5 md:p-10">
+        <div class="bb ze ki xn 2xl:ud-px-0">
+            <div class="tc sf yo zf kq">
+                <!-- Columna principal -->
+                <div class="ro">
+                    <div class="animate_top rounded-md shadow-solid-13 bg-white dark:bg-blacksection border border-stroke dark:border-strokedark p-7.5 md:p-10">
+                        @php
+                            // 1) Imagen principal
+                            $mainImage = $product->image_path ? asset('storage/'.$product->image_path) : null;
 
-                            {{-- Imagen principal --}}
-                            <img src="{{ asset('storage/'. $product->image_path) }}" alt="Producto" class="mb-6" />
+                            // 2) Otras imágenes
+                            $candidates = [
+                                'https://cdn.pixabay.com/photo/2017/04/25/05/44/basketball-2258650_1280.jpg',
+                                'https://concepto.de/wp-content/uploads/2014/10/baloncesto-1-e1551134227999-800x400.jpg',
+                                'https://t4.ftcdn.net/jpg/01/84/05/41/360_F_184054165_11zv2CDjnky90hGdyS2bjG1EWWnjgGsX.jpg',
+                                // duplicado para probar
+                                'https://cdn.pixabay.com/photo/2017/04/25/05/44/basketball-2258650_1280.jpg',
+                            ];
 
-                            <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb gb">{{ $product->name }}</h2>
+                            // 3) Lista final sin duplicados
+                            $images = array_values(array_unique(array_filter(array_merge([$mainImage], $candidates))));
+                        @endphp
 
-                            <div class="mb-6">
-                                {!! $product->description !!}
+
+
+                        @if(count($images))
+                            <!-- Imagen principal -->
+                            <div id="mainImageContainer" class="w-full h-72 md:h-96 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center mb-4 overflow-hidden">
+                                <img id="mainImage" src="{{ $images[0] }}" alt="Imagen principal del producto" class="object-contain rounded-md">
                             </div>
 
-                            {{-- Slider de imágenes --}}
-                            @php
-                                $product_images = [
-                                    'https://cdn.pixabay.com/photo/2017/04/25/05/44/basketball-2258650_1280.jpg',
-                                    'https://media.istockphoto.com/id/2121354204/photo/basketball-resting-on-a-court-during-a-big-championship-game.jpg?s=2048x2048&w=is&k=20&c=JHRdI5Hsb741bohGgeaaIS7QCGrmkA5SQY7j6SeHASQ=',
-                                    'https://unsplash.com/photos/shanghai-skyline-on-a-cloudy-day-0p37Ch2LYQc',
-                                    'https://unsplash.com/photos/a-hand-holds-a-payment-terminal-K-TCG8UZPLg',
-                                ];
-                            @endphp
-
-                            <div x-data="{ active: 0 }" class="relative w-full overflow-hidden rounded-md mt-6">
-                                <div class="flex transition-transform duration-500 ease-in-out"
-                                     :style="'transform: translateX(-' + active * 100 + '%)'">
-                                    @foreach($product_images as $img)
-                                        <div class="min-w-full flex-shrink-0">
-                                            <img src="{{ $img }}" alt="Imagen del producto" class="w-full h-64 object-cover rounded-md">
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                                <!-- Botones de navegación -->
-                                <div class="absolute inset-0 flex justify-between items-center px-4">
-                                    <button @click="active = (active === 0) ? {{ count($product_images) - 1 }} : active - 1"
-                                            class="bg-black bg-opacity-30 text-white px-2 py-1 rounded-full">
-                                        ‹
+                            <!-- Miniaturas -->
+                            <div id="thumbsContainer" class="flex gap-3 overflow-x-auto px-10 md:px-12 no-scrollbar">
+                                @foreach($images as $i => $src)
+                                    <button
+                                        type="button"
+                                        class="thumb-btn shrink-0 w-20 h-16 md:w-24 md:h-20 border rounded-md flex items-center justify-center transition
+                       {{ $i === 0 ? 'ring-2 ring-blue-500 border-blue-500' : 'border-gray-200 dark:border-gray-700' }}"
+                                        data-src="{{ $src }}"
+                                        aria-label="Miniatura {{ $i + 1 }}"
+                                    >
+                                        <img src="{{ $src }}" alt="Miniatura {{ $i + 1 }}" class="w-full h-full object-cover rounded-md" loading="lazy">
                                     </button>
-                                    <button @click="active = (active === {{ count($product_images) - 1 }}) ? 0 : active + 1"
-                                            class="bg-black bg-opacity-30 text-white px-2 py-1 rounded-full">
-                                        ›
-                                    </button>
-                                </div>
+                                @endforeach
+                            </div>
 
-                                <!-- Indicadores -->
-                                <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                                    @foreach($product_images as $index => $img)
-                                        <div @click="active = {{ $index }}"
-                                             class="w-3 h-3 rounded-full cursor-pointer"
-                                             :class="active === {{ $index }} ? 'bg-white' : 'bg-gray-400'"></div>
-                                    @endforeach
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const mainImage = document.getElementById('mainImage');
+                                    const thumbs = document.querySelectorAll('#thumbsContainer .thumb-btn');
+
+                                    thumbs.forEach(btn => {
+                                        btn.addEventListener('click', () => {
+                                            const newSrc = btn.dataset.src;
+                                            mainImage.src = newSrc;
+
+                                            // quitar clase activa de todas
+                                            thumbs.forEach(b => b.classList.remove('ring-2', 'ring-blue-500', 'border-blue-500'));
+                                            thumbs.forEach(b => b.classList.add('border-gray-200', 'dark:border-gray-700'));
+
+                                            // agregar clase activa a la seleccionada
+                                            btn.classList.add('ring-2', 'ring-blue-500', 'border-blue-500');
+                                            btn.classList.remove('border-gray-200', 'dark:border-gray-700');
+                                        });
+                                    });
+                                });
+                            </script>
+                        @endif
+
+                        <!-- Título y descripción -->
+                        <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb gb mt-8 text-gray-900 dark:text-white">
+                            {{ $product->name }}
+                        </h2>
+
+                        <div class="prose dark:prose-invert max-w-none mb-6">
+                            {!! $product->description !!}
+                        </div>
+                        {{-- ==== Disponibilité + Réservation ==== --}}
+                        <div id="rental-widget" class="mt-8 p-5 border border-stroke dark:border-strokedark rounded-lg bg-white dark:bg-blacksection">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Disponibilité de location</h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                                <div
+                                    x-data="{
+{{--                                            value: ['01/08/2025', '10/08/2025'],--}}
+                                            value: [],
+                                            init() {
+                                                let picker = flatpickr(this.$refs.picker, {
+                                                    mode: 'range',
+                                                    dateFormat: 'd/m/Y',
+                                                    defaultDate: this.value,
+                                                    locale: {
+                                                        firstDayOfWeek: 1, // Lundi
+                                                        weekdays: {
+                                                            shorthand: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                                                            longhand: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+                                                        },
+                                                        months: {
+                                                            shorthand: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+                                                            longhand: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+                                                        }
+                                                    },
+                                                    onReady: (selectedDates, dateStr, instance) => {
+                                                        // Set initial date range
+                                                        picker.setDate(this.value);
+                                                    },
+                                                    onChange: (date, dateString) => {
+                                                        this.value = dateString.split(' au ')
+                                                    }
+                                                })
+
+                                                this.$watch('value', () => picker.setDate(this.value))
+                                            },
+                                        }"
+                                            class="max-w-sm w-full"
+                                     >
+                                    <label for="picker" class="text-sm font-medium select-none text-gray-800">Date Range</label>
+                                    <input class="vd sm _g ch pm vk xm rg gm dm/40 dn/40 li mi" x-ref="picker" name="picker" id="picker" type="text">
+                                </div>
+                                <div>
+                                    <button id="btn-check"
+                                            class="rg lk gh  ml il gi hi">
+                                        Vérifier disponibilité
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="jn/2 so">
-                        <div class="animate_top fb">
-                            <form action="}" method="POST" class="tc">
-                                @csrf
-                                <div class="i">
-                                    <input
-                                        type="text"
-                                        placeholder="Rechercher ici..."
-                                        class="vd sm _g ch pm vk xm rg gm dm/40 dn/40 li mi"
-                                        name="search"
-                                    />
-                                    <button class="h r q _h">
-                                        <svg class="th ul ml il" width="21" height="21" viewBox="0 0 21 21" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2941 12.5699 16.0029 10.8204 16 9C16 5.132 12.867 2 9 2C5.132 2 2 5.132 2 9C2 12.867 5.132 16 9 16C10.8204 16.0029 12.5699 15.2941 13.875 14.025L14.025 13.875Z"
-                                            />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
 
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Sidebar (buscador / tags, si lo necesitas) -->
+                <div class="jn/2 so">
+                    <div class="animate_top fb">
+                        <form action="" method="POST" class="tc">
+                            @csrf
+                            <div class="i">
+                                <input
+                                    type="text"
+                                    placeholder="Rechercher ici..."
+                                    class="vd sm _g ch pm vk xm rg gm dm/40 dn/40 li mi"
+                                    name="search"
+                                />
+                                <button class="h r q _h">
+                                    <svg class="th ul ml il" width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2941 12.5699 16.0029 10.8204 16 9C16 5.132 12.867 2 9 2C5.132 2 2 5.132 2 9C2 12.867 5.132 16 9 16C10.8204 16.0029 12.5699 15.2941 13.875 14.025L14.025 13.875Z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    {{-- Aquí puedes añadir más widgets laterales si los usas --}}
                 </div>
             </div>
-        </section>
+        </div>
     </section>
-    <!-- ===== Blog End ===== -->
 </main>
 
 <x-partials.footer :heroes="$heroes" :socialnetworks="$socialnetworks"/>
@@ -141,7 +233,9 @@
 
 @stack('scripts')
 <script src="{{ asset('js/bundle.js') }}"></script>
-@livewireScripts
+@livewireScripts>
 
+{{-- Si Alpine no está en tu app.js, descomenta esta línea --}}
+{{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 </body>
 </html>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeroController;
 
 Route::get('/', [ HeroController::class, 'index' ])->name('home');
+Route::get('/gallerie', [\App\Http\Controllers\GalleryController ::class, 'index' ])->name('galeries');
 Route::get('/blog', [ \App\Http\Controllers\PostController::class, 'index' ])->name('blog.all');
 Route::get('/blog/{slug}', [ \App\Http\Controllers\PostController::class, 'show' ])->name('blog');
 Route::post('/blog/recherche', [ \App\Http\Controllers\PostController::class, 'search' ])->name('blog.search');
