@@ -6,6 +6,8 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -60,6 +62,13 @@ class ProductResource extends Resource
                     ->label('Image')
                     ->image()
                     ->directory('products'),
+                Repeater::make('images')
+                    ->relationship('images')
+                    ->schema([
+                        FileUpload::make('image_path')->image()->directory('products'),
+                    ])
+                    ->label('Product Images')
+                    ->columns(1),
 
                 Forms\Components\Toggle::make('active')
                     ->label('Actif')

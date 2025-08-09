@@ -55,20 +55,37 @@
                 <div class="ro">
                     <div class="animate_top rounded-md shadow-solid-13 bg-white dark:bg-blacksection border border-stroke dark:border-strokedark p-7.5 md:p-10">
                         @php
-                            // 1) Imagen principal
+                            use Illuminate\Support\Str;
+
+                            // 1) Principal (puede ser null)
                             $mainImage = $product->image_path ? asset('storage/'.$product->image_path) : null;
 
-                            // 2) Otras imágenes
-                            $candidates = [
-                                'https://cdn.pixabay.com/photo/2017/04/25/05/44/basketball-2258650_1280.jpg',
-                                'https://concepto.de/wp-content/uploads/2014/10/baloncesto-1-e1551134227999-800x400.jpg',
-                                'https://t4.ftcdn.net/jpg/01/84/05/41/360_F_184054165_11zv2CDjnky90hGdyS2bjG1EWWnjgGsX.jpg',
-                                // duplicado para probar
-                                'https://cdn.pixabay.com/photo/2017/04/25/05/44/basketball-2258650_1280.jpg',
-                            ];
+                            // 2) Todas las imágenes relacionadas del producto
+                            //    Soporta columnas: url | path | image_path
+                            $relatedImages = collect($product->images ?? [])
+                                ->map(function ($img) {
+                                    $u = $img->url ?? $img->path ?? $img->image_path ?? null;
+                                    if (!$u) return null;
 
-                            // 3) Lista final sin duplicados
-                            $images = array_values(array_unique(array_filter(array_merge([$mainImage], $candidates))));
+                                    // Si ya es absoluta, úsala tal cual; si es relativa, asume storage/
+                                    if (Str::startsWith($u, ['http://', 'https://'])) {
+                                        return $u;
+                                    }
+                                    return asset('storage/' . ltrim($u, '/'));
+                                })
+                                ->filter()        // quita null/empty
+                                ->unique()        // deduplica
+                                ->values()
+                                ->all();
+
+                            // 3) Arreglo final de todas las imágenes (principal + relacionadas), sin duplicados
+                            $images = array_values(array_unique(array_filter(array_merge(
+                                $mainImage ? [$mainImage] : [],
+                                $relatedImages
+                            ))));
+
+                            // 4) Si necesitas miniaturas que NO repitan la principal:
+                            $thumbs = array_values(array_filter($relatedImages, fn($u) => $u !== $mainImage));
                         @endphp
 
 
