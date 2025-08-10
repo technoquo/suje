@@ -54,7 +54,7 @@ class GalleryResource extends Resource
                 Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\IconColumn::make('status')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('year_id')
+                Tables\Columns\TextColumn::make('years.year')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

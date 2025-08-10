@@ -16,6 +16,6 @@ class Gallery extends Model
 
     public function years():\Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Year::class);
+        return $this->belongsTo(Year::class, 'year_id');
     }
 }
