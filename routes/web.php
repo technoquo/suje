@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\RentalController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeroController;
@@ -33,6 +34,8 @@ Route::post('/reset-password', [ResetPasswordController::class, 'store'])
     ->middleware('guest')
     ->name('password.update');
 
+
+
 Route::get('/', [ HeroController::class, 'index' ])->name('home');
 Route::get('/gallerie', [\App\Http\Controllers\GalleryController ::class, 'index' ])->name('galeries');
 Route::get('/gallerie/{year}', [\App\Http\Controllers\GalleryController ::class, 'show' ])->name('galeries.show');
@@ -47,3 +50,10 @@ Route::get('/activities/{slug}/{sport}/{group}', [ \App\Http\Controllers\SportCo
 Route::get('/professionals', [ \App\Http\Controllers\ProfessionalController::class, 'index' ])->name('professional');
 Route ::get('/location', [ \App\Http\Controllers\LocationController::class, 'index' ])->name('location.index');
 Route::get('/location/detail/{slug}', [ \App\Http\Controllers\LocationController::class, 'show' ])->name('location.show');
+
+
+    Route::post('/rentals/check-availability', [RentalController::class, 'checkAvailability'])
+        ->name('rentals.check');
+    Route::post('/rentals', [RentalController::class, 'store'])->name('rentals.create');
+    Route::get('/rentals/{id}', [ RentalController::class, 'show'  ])->name('rentals.show');
+

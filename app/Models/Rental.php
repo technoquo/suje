@@ -13,12 +13,12 @@ class Rental extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'start_date',
-        'end_date',
-        'return_date',
-        'total_price',
-        'status',
-        'penalty',
+        'date_debut',
+        'date_fin',
+        'date_retour',
+        'prix_total',
+        'statut',
+        'penalite',
     ];
 
     protected $casts = [

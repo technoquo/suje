@@ -22,6 +22,7 @@ class AuthController extends Controller
 
     public function login()
     {
+
         $heroes = Hero::first();
         $features = feature::whereStatus(1)->get();
         $abouts = About::first();
@@ -50,22 +51,21 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:8',
         ], [
             'email.required' => 'L\'adresse e-mail est obligatoire.',
             'email.email' => 'Veuillez entrer une adresse e-mail valide.',
             'password.required' => 'Le mot de passe est obligatoire.',
             'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
-            'password.confirmed' => 'Les mots de passe ne correspondent pas.',
         ]);
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
 
         return back()->withErrors([
-            'email' => 'Credenciales incorrectas',
+            'email' => 'Identifiants incorrects.',
         ])->onlyInput('email');
     }
 

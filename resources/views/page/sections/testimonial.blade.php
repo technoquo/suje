@@ -43,7 +43,9 @@
                                             <span class="rc ek xj kk wm zb">{{$testimonial->full_name}}</span>
                                             <span class="rc">{{$testimonial->position}}</span>
                                         </div>
-
+                                        <div>
+                                            <a href="{{route('professional')}}" class="lk gh dk rg tc wf xf _l gi hi">Allez reconnaître les mérites</a>
+                                        </div>
 
                                     </div>
                                 </div>

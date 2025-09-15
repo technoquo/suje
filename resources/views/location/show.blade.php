@@ -129,65 +129,39 @@
                             {!! $product->description !!}
                         </div>
                         {{-- ==== Disponibilité + Réservation ==== --}}
-                        <div id="rental-widget" class="mt-8 p-5 border border-stroke dark:border-strokedark rounded-lg bg-white dark:bg-blacksection">
+                        <div id="rental-widget" class="mt-8 p-5 border rounded-lg bg-white dark:bg-blacksection">
                             <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Disponibilité de location</h3>
-                            <div
-                                    x-data="{
-                              startDate: null,
-                              endDate: null,
-                              picker: null,
-                              init() {
-                              this.picker = flatpickr(this.$refs.picker, {
-                              mode: 'range',
-                              dateFormat: 'Y-m-d', // más práctico para guardar
-                              locale: 'fr',
-                              onReady: (selectedDates, dateStr, instance) => {
-                              if (this.startDate && this.endDate) {
-                              instance.setDate([this.startDate, this.endDate]);
-                              }
-                              },
-                              onChange: (selectedDates) => {
-                              // cuando seleccionas
-                              this.startDate = selectedDates[0]
-                              ? flatpickr.formatDate(selectedDates[0], 'Y-m-d')
-                              : null;
-                              this.endDate = selectedDates[1]
-                              ? flatpickr.formatDate(selectedDates[1], 'Y-m-d')
-                              : null;
-                              }
-                              });
-                              },
-                              }"
-                                    class="max-w-sm w-full"
+                            <!-- Selector de fechas -->
+                            <label for="picker" class="text-sm font-medium text-gray-800">
+                                Plage de dates
+                            </label>
+                            <input
+                                    id="picker"
+                                    type="text"
+                                    class="vd sm _g ch pm vk xm rg gm dm/40 dn/40 li mi dark:text-white"
                             >
-                                <label for="picker" class="text-sm font-medium select-none text-gray-800">
-                                    Plage de dates
-                                </label>
-                                <input
-                                        x-ref="picker"
-                                        name="picker"
-                                        id="picker"
-                                        type="text"
-                                        class="vd sm _g ch pm vk xm rg gm dm/40 dn/40 li mi dark:text-white"
+                            <!-- Botón para verificar -->
+                            <div class="mt-6 flex items-center gap-4">
+                                <!-- Botón para verificar -->
+                                <button
+                                        id="btn-check"
+                                        type="button"
+                                        class="lk gh dk rg tc wf xf _l gi hi"
                                 >
-                                <!-- Para debug -->
-{{--                                <div class="mt-2 text-sm text-gray-300 dark:text-gray-700">--}}
-{{--                                    Début: <span x-text="startDate ?? '---'"></span><br>--}}
-{{--                                    Fin: <span x-text="endDate ?? '---'"></span>--}}
-{{--                                </div>--}}
-                                <!-- Botón -->
-                                <div class="mt-10">
-                                    <button
-                                            id="btn-check"
-                                            type="button"
-                                            class="lk gh dk rg tc wf xf _l gi hi"
-                                            @click="alert(`Début: ${startDate ?? '---'}\nFin: ${endDate ?? '---'}`)"
-                                    >
-                                        Vérifier la disponibilité
-                                    </button>
-                                </div>
+                                    Vérifier la disponibilité
+                                </button>
+                                <!-- Mensaje dinámico -->
+                                <!-- Botón de reserva -->
+                                <button
+                                        id="btn-reserve"
+                                        type="button"
+                                        class="lk gh dk rg tc wf xf _l gi hi  text-white f"
+                                >
+                                    Réserver maintenant
+                                </button>
                             </div>
                         </div>
+                        <p id="availability-message" class="text-sm"></p>
                     </div>
                 </div>
                 <!-- Sidebar (buscador / tags, si lo necesitas) -->
@@ -236,6 +210,103 @@
 <!-- ====== Back To Top End ===== -->
 @stack('scripts')
 <script src="{{ asset('js/bundle.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let startDate = null;
+        let endDate = null;
+
+        // Inicializar Flatpickr
+        flatpickr("#picker", {
+            mode: "range",
+            dateFormat: "Y-m-d",
+            locale: "fr",
+            onChange: function(selectedDates) {
+                startDate = selectedDates[0]
+                    ? flatpickr.formatDate(selectedDates[0], 'Y-m-d')
+                    : null;
+                endDate = selectedDates[1]
+                    ? flatpickr.formatDate(selectedDates[1], 'Y-m-d')
+                    : null;
+            }
+        });
+
+        const btnCheck = document.getElementById('btn-check');
+        const btnReserve = document.getElementById('btn-reserve');
+        const messageBox = document.getElementById('availability-message');
+
+        btnCheck.addEventListener('click', function () {
+            fetch("{{ route('rentals.check') }}", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                body: JSON.stringify({
+                    product_id: {{ $product->id }},
+                    date_debut: startDate,
+                    date_fin: endDate
+                }),
+            })
+                .then(async res => {
+                    if (!res.ok) {
+                        const text = await res.text();
+                        console.error("Erreur serveur:", res.status, text);
+                        if (res.status === 401) {
+                            messageBox.textContent = "Veuillez vous connecter pour vérifier la disponibilité.";
+                            messageBox.className = "mt-3 text-sm text-red-600";
+                            btnReserve.classList.add("f");
+                            return;
+                        }
+                        throw new Error("Erreur serveur");
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    if (data) {
+                        messageBox.textContent = data.message;
+                        if (data.available) {
+                            messageBox.className = "mt-3 text-sm text-green-600";
+                            btnReserve.classList.remove("f");
+                        } else {
+                            messageBox.className = "mt-3 text-sm text-red-600";
+                            btnReserve.classList.add("f");
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.error("Catch error:", err);
+                    messageBox.textContent = "Erreur inattendue.";
+                    messageBox.className = "mt-3 text-sm text-red-600";
+                    btnReserve.classList.add("f");
+                });
+        });
+
+        // Acción del botón de reserva
+        btnReserve.addEventListener('click', function () {
+            fetch("{{ route('rentals.create') }}", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                body: JSON.stringify({
+                    product_id: {{ $product->id }},
+                    date_debut: startDate,
+                    date_fin: endDate
+                }),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.success) {
+                        window.location.href = "{{ route('rentals.show', $product->id) }}";
+                    }
+                });
+        });
+    });
+</script>
 @livewireScripts>
 {{-- Si Alpine no está en tu app.js, descomenta esta línea --}}
 {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
