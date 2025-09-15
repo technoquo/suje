@@ -79,8 +79,23 @@
                     </label>
                 </div>
 
-                <a href="#"  class="lk gh dk rg tc wf xf _l gi hi">S'identifier</a>
-                <a href="#"  class="lk gh dk rg tc wf xf _l gi hi">S'enregistrer</a>
+                {{-- Si NO está logueado --}}
+                @guest
+                    <a href="{{ route('login') }}" class="lk gh dk rg tc wf xf _l gi hi">S'identifier</a>
+                    <a href="{{ route('register') }}" class="lk gh dk rg tc wf xf _l gi hi">S'enregistrer</a>
+                @endguest
+
+                {{-- Si está logueado --}}
+                @auth
+                    <span class="text-sm mr-4">Bonjour, {{ Auth::user()->name }}</span>
+
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="lk gh dk rg tc wf xf _l gi hi">
+                            Se déconnecter
+                        </button>
+                    </form>
+                @endauth
             </div>
         </div>
     </div>

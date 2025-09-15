@@ -1,7 +1,37 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeroController;
+
+
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'store_register'])->name('register.store');
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'store_login'])->name('login.store');
+
+// Logout
+Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])
+    ->middleware('guest')
+    ->name('password.request');
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])
+    ->middleware('guest')
+    ->name('password.email');
+
+// Mostrar formulario para resetear
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])
+    ->middleware('guest')
+    ->name('password.reset');
+
+Route::post('/reset-password', [ResetPasswordController::class, 'store'])
+    ->middleware('guest')
+    ->name('password.update');
 
 Route::get('/', [ HeroController::class, 'index' ])->name('home');
 Route::get('/gallerie', [\App\Http\Controllers\GalleryController ::class, 'index' ])->name('galeries');
