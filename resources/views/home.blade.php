@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
 <head>
+    <link rel="icon" type="image/png" href="{{asset('favicon.ico')}}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{asset('favicon.svg')}}" />
+    <link rel="shortcut icon" href="{{asset('favicon.ico')}}" />
+    <meta name="apple-mobile-web-app-title" content="Suje" />
+    @if(app()->environment('production'))
+        <meta name="robots" content="index,follow">
+    @else
+        <meta name="robots" content="noindex,nofollow">
+    @endif
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta property="og:title" content="Suje">
+    <meta property="og:description" content="Le Centre Francophone de la Langue des Signes s'est donné pour mission de diffuser la langue des signes par des cours, des publications et de la recherche en L.S.">
+    <meta name="keywords" content="Suje, Sports, Club, Football, Padel, FutSal">
+    <meta property="og:image" content="{{ asset('img/og-cfls-1200x630.png') }}">
+    <meta property="og:url" content="https://suje.be">
+    <meta property="og:site_name" content="C.F.L.S. asbl">
+    <meta property="og:type" content="website">
 
-    <title>Suje</title>
+    <title>{{  config('app.name', 'Laravel') ?? 'Laravel' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
