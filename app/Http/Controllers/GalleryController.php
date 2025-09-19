@@ -6,7 +6,7 @@ use App\Models\Gallery;
 use App\Models\GalleryImage;
 use App\Models\Hero;
 use App\Models\SocialNetwork;
-use App\Models\year;
+use App\Models\Year;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
