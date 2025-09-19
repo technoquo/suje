@@ -16,6 +16,7 @@ class Rental extends Model
         'date_debut',
         'date_fin',
         'date_retour',
+        'quantity',
         'prix_total',
         'statut',
         'penalite',

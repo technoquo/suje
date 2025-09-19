@@ -2599,4 +2599,12 @@ h1,  h2,  h3,  h4,  h5,  h6{
     }
 }
 
+/* Fechas ocupadas: fondo rojo claro + texto rojo */
+.flatpickr-day.flatpickr-occupied {
+    background: #ffcccc !important;
+    color: #a00 !important;
+    border-radius: 50% !important;
+    opacity: 1 !important; /* asegura que no se vean “apagadas” */
+}
+
 

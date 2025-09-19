@@ -52,7 +52,18 @@
         <div class="bb ye ki xn vq jb jo">
             <div class="wc qf pn xo zf iq">
                 <!-- Galleries -->
-              detalles
+                @foreach($images as $image)
+
+                    <div class="animate_top sg vk rm xm">
+                        <div class="c rc i z-1 pg">
+                            <img class="w-full" src="{{asset($image->image_path)}}" alt="{{$image->image_alt}}" />
+                        </div>
+                        <div class="text-center">{{$image->image_alt}}</div>
+                    </div>
+                @endforeach
+
+
+                <!-- End Galleries -->
             </div>
         </div>
     </section>

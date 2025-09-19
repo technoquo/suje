@@ -34,11 +34,22 @@ class LocationController extends Controller
         $heroes = Hero::first();
         $socialnetworks = SocialNetwork::whereStatus(1)->get();
 
+        $occupiedRanges = $product->rentals()
+            ->where('statut', '!=', 'annulé') // opcional, excluir cancelados
+            ->get(['date_debut', 'date_fin'])
+            ->map(function ($rental) {
+                return [
+                    'from' => $rental->date_debut,
+                    'to'   => $rental->date_fin,
+                ];
+            });
+
         // Logic to display a specific location
         return view('location.show', [
 
             'heroes' => $heroes,
             'product' => $product,
+            'occupiedRanges' => $occupiedRanges,
             'socialnetworks' => $socialnetworks,
         ]);
     }

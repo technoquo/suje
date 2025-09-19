@@ -130,19 +130,37 @@
                         </div>
                         {{-- ==== Disponibilité + Réservation ==== --}}
                         <div id="rental-widget" class="mt-8 p-5 border rounded-lg bg-white dark:bg-blacksection">
-                            <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Disponibilité de location</h3>
+                            <h3 class="text-lg font-semibold mb-4">Disponibilité de location</h3>
+
                             <!-- Selector de fechas -->
                             <label for="picker" class="text-sm font-medium text-gray-800">
                                 Plage de dates
                             </label>
-                            <input
-                                    id="picker"
-                                    type="text"
-                                    class="vd sm _g ch pm vk xm rg gm dm/40 dn/40 li mi dark:text-white"
-                            >
-                            <!-- Botón para verificar -->
+                            <div class="mt-2 w-72">
+                                <input
+                                        id="picker"
+                                        type="text"
+                                        class="vd sm _g ch pm vk xm rg gm dm/40 dn/40 li mi"
+                                >
+                            </div>
+
+                            <!-- Campo cantidad -->
+                            <div class="mt-4 w-32">
+                                <label for="quantity" class="text-sm font-medium text-gray-800">
+                                    Quantité
+                                </label>
+                                <input
+                                        id="quantity"
+                                        name="quantity"
+                                        type="number"
+                                        min="1"
+                                        value="1"
+                                        class="vd sm _g ch pm vk xm rg gm dm/40 dn/40 li mi text-center"
+                                >
+                            </div>
+
+                            <!-- Botones -->
                             <div class="mt-6 flex items-center gap-4">
-                                <!-- Botón para verificar -->
                                 <button
                                         id="btn-check"
                                         type="button"
@@ -150,17 +168,17 @@
                                 >
                                     Vérifier la disponibilité
                                 </button>
-                                <!-- Mensaje dinámico -->
-                                <!-- Botón de reserva -->
+
                                 <button
                                         id="btn-reserve"
                                         type="button"
-                                        class="lk gh dk rg tc wf xf _l gi hi  text-white f"
+                                        class="lk gh dk rg tc wf xf _l gi hi text-white f"
                                 >
                                     Réserver maintenant
                                 </button>
                             </div>
                         </div>
+
                         <p id="availability-message" class="text-sm"></p>
                     </div>
                 </div>
@@ -211,6 +229,7 @@
 @stack('scripts')
 <script src="{{ asset('js/bundle.js') }}"></script>
 <script>
+    const occupiedRanges = @json($occupiedRanges);
     document.addEventListener('DOMContentLoaded', function () {
         let startDate = null;
         let endDate = null;
@@ -220,6 +239,26 @@
             mode: "range",
             dateFormat: "Y-m-d",
             locale: "fr",
+            minDate: "today",
+            disable: occupiedRanges,
+
+            onDayCreate: function(dObj, dStr, fp, dayElem) {
+                const day = new Date(dayElem.dateObj);
+                day.setHours(0,0,0,0);
+
+                occupiedRanges.forEach(range => {
+                    const from = new Date(range.from);
+                    const to   = new Date(range.to);
+
+                    from.setHours(0,0,0,0);
+                    to.setHours(0,0,0,0);
+
+                    if (day >= from && day <= to) {
+                        dayElem.classList.add("flatpickr-occupied");
+                    }
+                });
+            },
+
             onChange: function(selectedDates) {
                 startDate = selectedDates[0]
                     ? flatpickr.formatDate(selectedDates[0], 'Y-m-d')
@@ -293,15 +332,19 @@
                 },
                 body: JSON.stringify({
                     product_id: {{ $product->id }},
+                    quantity: document.getElementById('quantity').value,
                     date_debut: startDate,
                     date_fin: endDate
                 }),
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+
                     if (data.success) {
-                        window.location.href = "{{ route('rentals.show', $product->id) }}";
+
+                        window.location.href = "/rentals/order/" + data.rental.id;
+                    } else {
+                        alert(data.message);
                     }
                 });
         });

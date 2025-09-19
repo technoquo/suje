@@ -18,4 +18,10 @@ class Gallery extends Model
     {
         return $this->belongsTo(Year::class, 'year_id');
     }
+
+    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(GalleryImage::class);
+    }
+
 }

@@ -6,6 +6,9 @@ use App\Filament\Resources\GalleryResource\Pages;
 use App\Filament\Resources\GalleryResource\RelationManagers;
 use App\Models\Gallery;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -42,6 +45,21 @@ class GalleryResource extends Resource
                     ->afterStateUpdated(function (callable $set, $state) {
                         $set('year_id', $state);
                     }),
+                Repeater::make('images')
+                    ->relationship('images')
+                    ->schema([
+                        FileUpload::make('image_path')
+                            ->image()
+                            ->directory('galleries')
+                            ->label('Image'),
+
+                        TextInput::make('image_alt')
+                            ->label('Texte alternatif')
+                            ->placeholder("Description de l'image")
+                            ->maxLength(255),
+                    ])
+                    ->label("Galerie d'images")
+                    ->columns(1),
             ]);
     }
 

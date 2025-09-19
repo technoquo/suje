@@ -55,5 +55,6 @@ Route::get('/location/detail/{slug}', [ \App\Http\Controllers\LocationController
     Route::post('/rentals/check-availability', [RentalController::class, 'checkAvailability'])
         ->name('rentals.check');
     Route::post('/rentals', [RentalController::class, 'store'])->name('rentals.create');
-    Route::get('/rentals/{id}', [ RentalController::class, 'show'  ])->name('rentals.show');
+    Route::get('/rentals/order/{id}', [ RentalController::class, 'show'  ])->name('rentals.show');
+
 

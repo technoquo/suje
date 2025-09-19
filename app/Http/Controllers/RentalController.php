@@ -20,8 +20,10 @@ use Illuminate\Support\Facades\Auth;
 
 class RentalController extends Controller
 {
+
     public function checkAvailability(Request $request)
     {
+ //       Por temporal
         if (!auth()->check()) {
             return response()->json([
                 'available' => false,
@@ -62,38 +64,41 @@ class RentalController extends Controller
     public function store(Request $request)
     {
 
+
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'date_debut' => 'required|date',
-            'date_fin'   => 'required|date|after_or_equal:date_debut',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
         ]);
 
         $product = \App\Models\Product::find($request->input('product_id'));
+
         if (!$product) {
             return redirect()->back()->withErrors(['product_id' => 'Produit non trouvé.'])->withInput();
         }
 
 
-
         $rental = Rental::create([
-            'user_id'    => Auth::id(),
+            'user_id' => Auth::id(),
             'product_id' => $product->id,
-            'prix_total' =>  $product->price_per_day,
+            'quantity' => $request->input('quantity'),
+            'prix_total' => $product->price_per_day * $request->input('quantity'),
             'date_debut' => $request->input('date_debut'),
-            'date_fin'   => $request->input('date_fin'),
-            'statut'     => 'en_attente',
+            'date_fin' => $request->input('date_fin'),
+            'statut' => 'en_attente',
         ]);
 
+        return response()->json([
+            'success' => true,
+            'message' => 'Location créée avec succès',
+            'rental' => $rental,
+        ]);
 
-
-        return redirect()->route('rentals.show', $rental->id)
-            ->with('success', 'Location créée avec succès et en attente de confirmation.');
     }
 
-
-    public function show($id)
+        public function show($id)
     {
-        dd($id);
+
         $heroes = Hero::first();
         $features = feature::whereStatus(1)->get();
         $abouts = About::first();
@@ -122,6 +127,12 @@ class RentalController extends Controller
             'clients',
             'posts'));
     }
+
+
+
+
+
+
 
 
 }

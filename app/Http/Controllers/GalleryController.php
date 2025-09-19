@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
+use App\Models\GalleryImage;
 use App\Models\Hero;
 use App\Models\SocialNetwork;
+use App\Models\year;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -25,10 +27,11 @@ class GalleryController extends Controller
 
     public function show($year)
     {
-
-
         $heroes = Hero::first();
         $socialnetworks = SocialNetwork::whereStatus(1)->get();
-        return view('gallery.show', compact('year','heroes', 'socialnetworks'));
+        $year_id = Year::where('year', $year)->first();
+        $gallery = Gallery::where('year_id', $year_id->id)->first();
+        $images = GalleryImage::where('gallery_id', $gallery->id)->get();
+        return view('gallery.show', compact('year','images','heroes', 'socialnetworks'));
     }
 }
