@@ -34,15 +34,15 @@ class HeroController extends Controller
 
         return view('home',
             compact('heroes',
-                    'socialnetworks',
-                    'features',
-                    'abouts',
-                    'teams',
-                    'services',
-                    'testimonials',
-                     'counters',
-                     'clients',
-                     'posts'));
+                'socialnetworks',
+                'features',
+                'abouts',
+                'teams',
+                'services',
+                'testimonials',
+                'counters',
+                'clients',
+                'posts'));
     }
 
     /**
