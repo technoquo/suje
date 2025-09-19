@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use App\Models\Client;
 use App\Models\Counter;
-use App\Models\feature;
+use App\Models\Feature;
 use App\Models\Hero;
 use App\Models\Post;
 use App\Models\Service;
@@ -22,7 +22,7 @@ class HeroController extends Controller
     public function index()
     {
         $heroes = Hero::first();
-        $features = feature::whereStatus(1)->get();
+        $features = Feature::whereStatus(1)->get();
         $abouts = About::first();
         $teams = Team::whereActive(1)->get();
         $services = Service::whereStatus(1)->get();
