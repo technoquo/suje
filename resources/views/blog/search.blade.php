@@ -1,28 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Suje</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            lucide.createIcons();
-        });
-    </script
-
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
-    @stack('styles')
-</head>
-<!-- ===== Header Start ===== -->
-<x-partials.header :heroes="$heroes"/>
+@extends('layouts.app')
+@section('content')
 <!-- ===== Header End ===== -->
 <body
     x-data="{ page: 'home', 'darkMode': false, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
@@ -32,18 +9,11 @@
     :class="{'b eh': darkMode === false}"
 >
 <section class="ji gp uq">
-    <div
-        x-data="{ sectionTitle: `Résultats des blogs`}"
-    >
-
         <div class="animate_top bb ze rj ki xn vq">
-            <h2
-                x-text="sectionTitle"
-                class="fk vj pr kk wm on/5 gq/2 bb _b"
-            ></h2>
-
+            <h2 class="fk vj pr kk wm on/5 gq/2 bb _b"
+            >Résultats des blogs</h2>
         </div>
-    </div>
+
     <div class="bb ye ki xn vq jb jo">
         @if($posts->isEmpty())
             <div>
@@ -119,12 +89,4 @@
     </svg>
 </button>
 <!-- ====== Back To Top End ===== -->
-
-
-@stack('scripts')
-<script src="{{ asset('js/bundle.js') }}"></script>
-
-@livewireScripts
-
-</body>
-</html>
+@endsection

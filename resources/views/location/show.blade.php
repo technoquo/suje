@@ -1,32 +1,8 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Suje</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            lucide.createIcons();
-        });
-    </script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
-    @stack('styles')
-</head>
-<body
-        x-data="{ page: 'home', 'darkMode': false, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
-        x-init="
-      darkMode = JSON.parse(localStorage.getItem('darkMode'));
-      $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
-        :class="{'b eh': darkMode === false}"
->
+@extends('layouts.app')
+@section('content')
+
+@push('styles')
+
 <style>
     /* toque dark */
     :root.dark .flatpickr-calendar {
@@ -42,10 +18,8 @@
         background: #2563eb; border-color: #2563eb;
     }
 </style>
-<!-- ===== Header Start ===== -->
-<x-partials.header :heroes="$heroes"/>
-<!-- ===== Header End ===== -->
-<main>
+@endpush
+
     <section class="ji gp uq">
         <div class="bb ze ki xn 2xl:ud-px-0">
             <div class="tc sf yo zf kq">
@@ -226,8 +200,7 @@
     </svg>
 </button>
 <!-- ====== Back To Top End ===== -->
-@stack('scripts')
-<script src="{{ asset('js/bundle.js') }}"></script>
+@push('scripts')
 <script>
     const occupiedRanges = @json($occupiedRanges);
     document.addEventListener('DOMContentLoaded', function () {
@@ -350,8 +323,5 @@
         });
     });
 </script>
-@livewireScripts>
-{{-- Si Alpine no está en tu app.js, descomenta esta línea --}}
-{{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
-</body>
-</html>
+@endpush
+@endsection

@@ -1,14 +1,12 @@
 <!-- ===== Clients Start ===== -->
 <section class="pj vp mr">
     <!-- Section Title Start -->
-    <div
-        x-data="{ sectionTitle: `Avec le soutien de`}"
-    >
+    <div>
         <div class="animate_top bb ze rj ki xn vq">
             <h2
-                x-text="sectionTitle"
+
                 class="fk vj pr kk wm on/5 gq/2 bb _b"
-            ></h2>
+            >Avec le soutien de</h2>
 
         </div>
     </div>

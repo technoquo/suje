@@ -8,15 +8,13 @@
     <img src="images/shape-13.svg" alt="Shape" class="h r q" />
 
     <!-- Section Title Start -->
-    <div
-        x-data="{ sectionTitle: `We Offer Great Affordable Premium Prices.`, sectionTitleText: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using.`}"
-    >
+    <div>
         <div class="animate_top bb ze rj ki xn vq">
             <h2
-                x-text="sectionTitle"
+
                 class="fk vj pr kk wm on/5 gq/2 bb _b"
             ></h2>
-            <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+            <p class="bb on/5 wo/5 hq">Price</p>
         </div>
     </div>
     <!-- Section Title End -->

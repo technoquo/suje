@@ -1,18 +1,5 @@
 <!-- ===== Services Start ===== -->
 <section class="lj tp kr">
-    <!-- Section Title Start -->
-{{--    <div--}}
-{{--        x-data="{ sectionTitle: `We Offer The Best Quality Service for You`, sectionTitleText: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.`}"--}}
-{{--    >--}}
-{{--        <div class="animate_top bb ze rj ki xn vq">--}}
-{{--            <h2--}}
-{{--                x-text="sectionTitle"--}}
-{{--                class="fk vj pr kk wm on/5 gq/2 bb _b"--}}
-{{--            ></h2>--}}
-{{--            <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-    <!-- Section Title End -->
 
     <div class="flex justify-center items-center bb ze ki xn yq mb en">
         <div class="flex flex-wrap justify-center gap-8">
