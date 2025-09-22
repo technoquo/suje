@@ -15,6 +15,10 @@ class SportController extends Controller
 
     public function index($slug, $sport)
     {
+
+
+
+
         $heroes = Hero::first();
         $socialNetworks = SocialNetwork::where('status', 1)->get();
 
@@ -22,6 +26,8 @@ class SportController extends Controller
         $service = Service::where('title', 'LIKE', "%$slug%")->first();
 
         $services = Service::whereStatus(1)->get();
+
+
 
         if (!$service) {
             return redirect()->back()->withErrors(['error' => 'Servicio no encontrado.']);
@@ -32,6 +38,8 @@ class SportController extends Controller
             ->where('service_id', $service->id)
             ->first();
 
+
+
         if (!$serviceImage) {
             return redirect()->back()->withErrors(['error' => 'Imagen del servicio no encontrada.']);
         }
@@ -40,6 +48,8 @@ class SportController extends Controller
         $groups = Group::where('service_id', $service->id)
             ->where('sport', $serviceImage->id)
             ->get();
+
+
 
 
         return view('sports.index', [
