@@ -14,8 +14,8 @@
                             <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb gb">{{$activity->title}}</h2>
 
                             <ul class="tc uf cg 2xl:ud-gap-15 fb">
-                                <li><span class="rc kk wm">Author: </span>{{ $activity->user->name }}</li>
-                                <li><span class="rc kk wm">Published On: </span>{{ \Carbon\Carbon::parse($activity->date_published)->locale('fr')->isoFormat('D MMMM YYYY') }}</li>
+{{--                                <li><span class="rc kk wm">Author: </span>{{ $activity->user->name }}</li>--}}
+{{--                                <li><span class="rc kk wm">Published On: </span>{{ \Carbon\Carbon::parse($activity->date_published)->locale('fr')->isoFormat('D MMMM YYYY') }}</li>--}}
                                 @if($activity->link_video)
                                     <li><span class="rc kk wm">Video LSFB: </span>
                                         <iframe width="560" height="315" src="{{ $activity->link_video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

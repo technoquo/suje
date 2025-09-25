@@ -12,7 +12,12 @@ class Group extends Model
         'subtitle',
         'sport',
         'status',
+        'color',
         'service_id',
+    ];
+
+    protected $casts = [
+        'colors' => 'array',
     ];
 
     public function service(): \Illuminate\Database\Eloquent\Relations\BelongsTo

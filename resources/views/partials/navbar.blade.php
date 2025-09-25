@@ -1,7 +1,7 @@
 <nav>
     <ul class="tc _o sf yo cg ep">
         <li><a href="/" class="xl" :class="{ 'mk': page === 'home' }">Accueil</a></li>
-        <li><a href="{{route('galeries')}}" class="xl">Galeries</a></li>
+{{--        <li><a href="{{route('galeries')}}" class="xl">Galeries</a></li>--}}
         <li class="c i" x-data="{ dropdown: false }">
             <a
                     href="#"
@@ -10,7 +10,7 @@
                     :class="{ 'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' || page === 'signup' || page === '404' }"
             >
 
-                Tornée
+                Clubs
 
                 <svg
                         :class="{ 'wh': dropdown }"
@@ -27,6 +27,8 @@
             </ul>
             <!-- Dropdown End -->
         </li>
+        <li><a href="{{route('activities.all')}}" class="xl" :class="{ 'mk': page === 'signup' }">Evénements</a></li>
+        <li><a href="{{route('location.index')}}" class="xl" :class="{ 'mk': page === 'signin' }">Location</a></li>
         <li class="c i" x-data="{ dropdown: false }">
             <a
                     href="#"
@@ -34,7 +36,7 @@
                     @click.prevent="dropdown = !dropdown"
                     :class="{ 'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' || page === 'signup' || page === '404' }"
             >
-                Pages
+                Divers
 
                 <svg
                         :class="{ 'wh': dropdown }"
@@ -45,11 +47,10 @@
 
             <!-- Dropdown Start -->
             <ul class="a" :class="{ 'tc': dropdown }">
-                <li><a href="{{route('blog.all')}}" class="xl" :class="{ 'mk': page === 'blog-grid' }">Blog</a></li>
-                <li><a href="{{route('professional')}}" class="xl" :class="{ 'mk': page === 'blog-single' }">Métiers</a></li>
-                <li><a href="{{route('location.index')}}" class="xl" :class="{ 'mk': page === 'signin' }">Location</a></li>
-                <li><a href="{{route('activities.all')}}" class="xl" :class="{ 'mk': page === 'signup' }">Evénements</a></li>
-                {{--                            <li><a href="404.html" class="xl" :class="{ 'mk': page === '404' }">404</a></li>--}}
+               {{-- <li><a href="{{route('blog.all')}}" class="xl" :class="{ 'mk': page === 'blog-grid' }">Blog</a></li>--}}
+                <li><a href="{{route('professional')}}" class="xl" :class="{ 'mk': page === 'blog-single' }">Métiers professionnels</a></li>
+{{--             <li><a href="{{route('activities.all')}}" class="xl" :class="{ 'mk': page === 'signup' }">Evénements</a></li>--}}
+                {{--  <li><a href="404.html" class="xl" :class="{ 'mk': page === '404' }">404</a></li>--}}
             </ul>
             <!-- Dropdown End -->
         </li>

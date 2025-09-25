@@ -4,7 +4,7 @@
     @include('page.sections.features')
     @include('page.sections.about')
     @include('page.sections.team')
-    @include('page.sections.services')
+{{--    @include('page.sections.services')--}}
     {{--    @include('page.sections.price')--}}
     {{--    @include('page.sections.projects')--}}
     @include('page.sections.testimonial')

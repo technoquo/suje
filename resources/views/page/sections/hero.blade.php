@@ -5,7 +5,7 @@
         <img src="{{asset('images/shape-01.svg')}}" alt="shape" class="xc 2xl:ud-block h t -ud-left-[10%] ua" />
         <img src="{{ asset('images/shape-02.svg') }}" alt="shape" class="xc 2xl:ud-block h u p va" />
         <img src="{{ asset('images/shape-03.svg') }}" alt="shape" class="xc 2xl:ud-block h v w va" />
-        <img src="{{ asset('images/shape-04.svg') }}" alt="shape" class="h q r" />
+{{--        <img src="{{ asset('images/shape-04.svg') }}" alt="shape" class="h q r" />--}}
         <img src="{{ asset(asset('storage/'. $heroes->image)) }}" alt="Woman" class="h q r-suje ua absolute top-5" width="650"  />
     </div>
     <!-- Hero Content -->

@@ -62,10 +62,10 @@
 
                     <div class="yh">
                         <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="{{ asset('images/icon-man.svg') }}" alt="User" />
-                                <p>{{ $activity->user->name }}</p>
-                            </div>
+{{--                            <div class="tc wf ag">--}}
+{{--                                <img src="{{ asset('images/icon-man.svg') }}" alt="User" />--}}
+{{--                                <p>{{ $activity->user->name }}</p>--}}
+{{--                            </div>--}}
                             <div class="tc wf ag">
                                 <img src="{{ asset('images/icon-calender.svg') }}" alt="Calender" />
                                 <p>{{ \Carbon\Carbon::parse($activity->date_published)->translatedFormat('l, d F Y') }}</p>

@@ -66,6 +66,27 @@ class GroupResource extends Resource
                         })
                         ->required()
                         ->reactive(), // Importante para que se actualicen las opciones al cambiar el service_id
+                Forms\Components\Select::make('color')
+                    ->label('Couleurs')
+                    ->options([
+                        'red'       => 'Rouge',
+                        'blue'      => 'Bleu',
+                        'green'     => 'Vert',
+                        'yellow'    => 'Jaune',
+                        'black'     => 'Noir',
+                        'white'     => 'Blanc',
+                        'orange'    => 'Orange',
+                        'purple'    => 'Violet',
+                        'pink'      => 'Rose',
+                        'brown'     => 'Marron',
+                        'gray'      => 'Gris',
+                        'cyan'      => 'Cyan',
+                        'teal'      => 'Turquoise',
+                        'lime'      => 'Citron vert',
+                        'indigo'    => 'Indigo',
+                        'gold'      => 'Or',
+                        'silver'    => 'Argent',
+                    ]),
                 Forms\Components\Toggle::make('status')
                     ->label('Statut')
                     ->default(1)
