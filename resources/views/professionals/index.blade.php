@@ -51,15 +51,19 @@
 
                             </div>
                         </div>
-                        <iframe
-                            src="{{$professional->vimeo_url}}"
-                            id="vimeo-{{$professional->id}}"
-                            class="fslightbox-source"
-                            width="1280"
-                            height="720"
+                        @php
+                            $vimeoEmbed = str_replace('https://vimeo.com/', 'https://player.vimeo.com/video/', $professional->vimeo_url);
+                        @endphp
 
-                            allow="autoplay; fullscreen"
-                            allowFullScreen
+                        <iframe
+                                src="{{ $vimeoEmbed }}"
+                                id="vimeo-{{ $professional->id }}"
+                                class="fslightbox-source"
+                                width="1280"
+                                height="720"
+                                frameborder="0"
+                                allow="autoplay; fullscreen"
+                                allowfullscreen
                         ></iframe>
 
 
