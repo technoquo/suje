@@ -1,7 +1,7 @@
 <!-- ===== About Start ===== -->
-<section class="ji gp uq 2xl:ud-py-35 pg">
+<section class="mt-10">
 
-    <div class="bb ze ki xn wq">
+
         <div class="tc wf gg qq">
             <!-- About Images -->
             <div class="animate_left xc gn gg jn/2 i">
@@ -52,6 +52,6 @@
 
             </div>
         </div>
-    </div>
+
 </section>
 <!-- ===== About End ===== -->

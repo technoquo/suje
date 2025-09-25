@@ -92,4 +92,13 @@ class HeroController extends Controller
     {
         //
     }
+
+    public function ligue()
+    {
+        $heroes = Hero::first();
+        $services = Service::whereStatus(1)->get();
+        $socialnetworks = SocialNetwork::whereStatus(1)->get();
+
+        return view('ligue', compact('heroes','socialnetworks','services'));
+    }
 }

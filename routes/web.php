@@ -37,6 +37,7 @@ Route::post('/reset-password', [ResetPasswordController::class, 'store'])
 
 
 Route::get('/', [ HeroController::class, 'index' ])->name('home');
+Route::get('/groups', [ \App\Http\Controllers\HeroController::class, 'ligue' ])->name('groups');
 Route::get('/gallerie', [\App\Http\Controllers\GalleryController ::class, 'index' ])->name('galeries');
 Route::get('/gallerie/{year}', [\App\Http\Controllers\GalleryController ::class, 'show' ])->name('galeries.show');
 Route::get('/blog', [ \App\Http\Controllers\PostController::class, 'index' ])->name('blog.all');

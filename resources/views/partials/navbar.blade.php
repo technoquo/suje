@@ -4,9 +4,9 @@
 {{--        <li><a href="{{route('galeries')}}" class="xl">Galeries</a></li>--}}
         <li class="c i" x-data="{ dropdown: false }">
             <a
-                    href="#"
+                    href="https://google.com"
                     class="xl tc wf yf bg"
-                    @click.prevent="dropdown = !dropdown"
+                    @click="dropdown = !dropdown"
                     :class="{ 'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' || page === 'signup' || page === '404' }"
             >
 

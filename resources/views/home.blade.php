@@ -10,7 +10,7 @@
     @include('page.sections.testimonial')
     @include('page.sections.counter')
     @include('page.sections.clients')
-    @include('page.sections.blog')
+{{--    @include('page.sections.blog')--}}
     @include('page.sections.contact')
     {{--    @include('page.sections.cta')--}}
 @endsection
