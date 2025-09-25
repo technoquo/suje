@@ -21,6 +21,13 @@
                                         <iframe width="560" height="315" src="{{ $activity->link_video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </li>
                                 @endif
+                                @if($activity->pdf)
+                                    <li>
+                                        <a href="{{ asset('storage/' . $activity->pdf) }}" target="_blank" class="lk gh dk rg tc wf xf _l gi hi">
+                                            Télécharger le PDF
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
 
                             <div>

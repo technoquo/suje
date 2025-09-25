@@ -49,8 +49,16 @@ class ActivityResource extends Resource
                     ->label('Lien vidéo')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('link_google')
-                    ->label('Lien Google')
+                    ->label('Liens externes')
                     ->maxLength(255),
+                Forms\Components\FileUpload::make('pdf')
+                    ->label('Fichier PDF')
+                    ->acceptedFileTypes(['application/pdf']) // Solo permite PDFs
+                    ->directory('pdfs') // Carpeta dentro de storage/app/public/pdfs
+                    ->downloadable() // Agrega botón de descarga en el panel
+                    ->openable() // Agrega botón para abrir el PDF en el navegador
+                    ->preserveFilenames() // Mantiene el nombre original del archivo
+                    ->maxSize(10240), // Máx. 10 MB
                 Forms\Components\Select::make('user_id')
                     ->required()
                     ->relationship('user', 'name'),

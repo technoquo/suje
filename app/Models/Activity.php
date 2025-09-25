@@ -15,6 +15,7 @@ class Activity extends Model
         'status',
         'link_video',
         'link_google',
+        'pdf',
         'user_id',
         'service_id',
         'service_image_id',
