@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <iframe
-                            src="{{$professional->video}}"
+                            src="{{$professional->vimeo_url}}"
                             id="vimeo-{{$professional->id}}"
                             class="fslightbox-source"
                             width="1280"

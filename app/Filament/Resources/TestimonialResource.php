@@ -34,6 +34,10 @@ class TestimonialResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('Image')
                     ->image(),
+                Forms\Components\TextInput::make('vimeo_url')
+                    ->label('Lien Vimeo')
+                    ->url()
+                    ->placeholder('https://vimeo.com/123456789'),
                 Forms\Components\Textarea::make('testimony')
                     ->label('Témoignage')
                     ->required()

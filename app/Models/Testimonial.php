@@ -11,6 +11,7 @@ class Testimonial extends Model
         'position',
         'image',
         'testimony',
+        'video',
         'sections_id',
         'status',
     ];
