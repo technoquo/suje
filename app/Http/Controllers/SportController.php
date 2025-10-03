@@ -9,6 +9,7 @@ use App\Models\Service;
 use App\Models\ServiceImage;
 use App\Models\SocialNetwork;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SportController extends Controller
 {
@@ -103,12 +104,16 @@ class SportController extends Controller
         $search = $request->input('search');
         $heroes = Hero::first();
         $socialnetworks = SocialNetwork::where('status', 1)->get();
-        $activities = Activity::whereStatus(1)
-            ->where('title', 'LIKE', "%{$search}%")
-            ->orWhere('description', 'LIKE', "%{$search}%")
-            ->orderBy('date_published', 'desc')
+        $activities = Activity::query()
+            ->where('activities.status', 1)
+            ->where('activities.service_id', 4) // el filtro por servicio
+            ->where(function ($q) use ($search) {
+                $q->where('activities.title', 'LIKE', "%{$search}%")
+                    ->orWhere('activities.description', 'LIKE', "%{$search}%");
+            })
+            ->with(['group', 'service']) // eager loading si tienes relaciones en el modelo
+            ->orderBy('activities.date_published', 'desc')
             ->paginate(6);
-
         return view('sports.all', compact('heroes', 'socialnetworks', 'activities'));
     }
 
@@ -116,11 +121,19 @@ class SportController extends Controller
     {
         $heroes = Hero::first();
         $socialNetworks = SocialNetwork::where('status', 1)->get();
-        $activity = Activity::where('slug', $slug)->first();
-        return view('sports.activity', [
+
+        $activities = DB::table('activities')
+            ->join('groups', 'activities.group_id', '=', 'groups.id')
+            ->where('groups.slug', 'LIKE', "%{$slug}%")
+            ->select('activities.*', 'groups.slug') // solo lo que realmente existe
+            ->paginate(6);
+
+
+
+        return view('sports.activities', [
             'heroes' => $heroes,
             'socialnetworks' => $socialNetworks,
-            'activity' => $activity,
+            'activities' => $activities,
         ]);
     }
 
@@ -131,7 +144,7 @@ class SportController extends Controller
         $socialnetworks = SocialNetwork::whereStatus(1)->get();
         $activities = Activity::where('status', 1)
             ->whereRaw('LOWER(title) LIKE ?', ['%' . strtolower($search) . '%'])
-            ->get();
+            ->paginate(6);
 
         return view('sports.search', compact('activities', 'heroes','socialnetworks'));
     }

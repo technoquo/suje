@@ -2,10 +2,10 @@
 <section class="i pg ji gp uq">
     <!-- Bg Shapes -->
     <span class="rc h s r vd fd/5 fh rm"></span>
-    <img src="images/shape-08.svg" alt="Shape Bg" class="h q r" />
-    <img src="images/shape-09.svg" alt="Shape" class="of h y z/2" />
-    <img src="images/shape-10.svg" alt="Shape" class="h _ aa" />
-    <img src="images/shape-11.svg" alt="Shape" class="of h m ba" />
+    <img src="../images/shape-08.svg" alt="Shape Bg" class="h q r" />
+    <img src="../images/shape-09.svg" alt="Shape" class="of h y z/2" />
+    <img src="../images/shape-10.svg" alt="Shape" class="h _ aa" />
+    <img src="../images/shape-11.svg" alt="Shape" class="of h m ba" />
 
     <!-- Section Title Start -->
     <div

@@ -38,6 +38,7 @@ Route::post('/reset-password', [ResetPasswordController::class, 'store'])
 
 Route::get('/', [ HeroController::class, 'index' ])->name('home');
 Route::get('/groups', [ \App\Http\Controllers\HeroController::class, 'ligue' ])->name('groups');
+Route::get('/suje/teams', [ \App\Http\Controllers\HeroController::class, 'teams' ])->name('teams');
 Route::get('/gallerie', [\App\Http\Controllers\GalleryController ::class, 'index' ])->name('galeries');
 Route::get('/gallerie/{year}', [\App\Http\Controllers\GalleryController ::class, 'show' ])->name('galeries.show');
 Route::get('/blog', [ \App\Http\Controllers\PostController::class, 'index' ])->name('blog.all');
@@ -45,10 +46,11 @@ Route::get('/blog/{slug}', [ \App\Http\Controllers\PostController::class, 'show'
 Route::post('/blog/recherche', [ \App\Http\Controllers\PostController::class, 'search' ])->name('blog.search');
 Route::get('/activity/{slug}', [ \App\Http\Controllers\SportController::class, 'show' ])->name('sport.activity');
 Route::get('/{slug}/{sport}', [ \App\Http\Controllers\SportController::class, 'index' ])->name('sport');
-Route::get('/activities',[ \App\Http\Controllers\SportController::class, 'all' ])->name('activities.all');
-Route::post('/activities/recherche', [ \App\Http\Controllers\SportController::class, 'search' ])->name('activities.search');
-Route::get('/activities/{slug}/{sport}/{group}', [ \App\Http\Controllers\SportController::class, 'activities' ])->name('sport.activities');;
+Route::get('/evenements',[ \App\Http\Controllers\SportController::class, 'all' ])->name('activities.all');
+Route::post('/evenements/recherche', [ \App\Http\Controllers\SportController::class, 'search' ])->name('activities.search');
+Route::get('/evenements/{slug}/{sport}/{group}', [ \App\Http\Controllers\SportController::class, 'activities' ])->name('sport.activities');;
 Route::get('/professionals', [ \App\Http\Controllers\ProfessionalController::class, 'index' ])->name('professional');
+Route::get('/violences', [ \App\Http\Controllers\ViolenceController::class, 'index' ])->name('violences');
 Route ::get('/location', [ \App\Http\Controllers\LocationController::class, 'index' ])->name('location.index');
 Route::get('/location/detail/{slug}', [ \App\Http\Controllers\LocationController::class, 'show' ])->name('location.show');
 

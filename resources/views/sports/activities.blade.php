@@ -1,9 +1,16 @@
 @extends('layouts.app')
 @section('content')
 
+
 <section class="ji gp uq">
     <div class="bb ye ki xn vq jb jo">
-        <h2 class="fk vj pr kk wm on/5 gq/2 bb _b text-center uppercase">{{$ligue_slug}} - {{$sport_slug}} - {{$group_slug}} </h2>
+        <!-- Ícono arriba de la lista de actividades -->
+        <div class="flex justify-end mb-4">
+            <a href="https://instagram.com/suje_asbl" target="_blank">
+                <i data-lucide="instagram"
+                   class="w-7 h-7 text-pink-500 hover:text-pink-600 transition-colors duration-300"></i>
+            </a>
+        </div>
         <div class="{{ count($activities) ? 'wc qf pn xo zf iq' : 'flex items-center justify-center' }}">
             <!-- Blog Item -->
             @forelse($activities as $activity)
@@ -20,10 +27,7 @@
 
                     <div class="yh">
                         <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="{{ asset('images/icon-man.svg') }}" alt="User" />
-                                <p>{{ $activity->user->name }}</p>
-                            </div>
+
                             <div class="tc wf ag">
                                 <img src="{{ asset('images/icon-calender.svg') }}" alt="Calender" />
                                 <p>{{ \Carbon\Carbon::parse($activity->date_published)->translatedFormat('l, d F Y') }}</p>

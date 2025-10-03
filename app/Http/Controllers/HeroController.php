@@ -32,6 +32,8 @@ class HeroController extends Controller
         $posts = Post::whereStatus('published')->get();
         $socialnetworks = SocialNetwork::whereStatus(1)->get();
 
+
+
         return view('home',
             compact('heroes',
                 'socialnetworks',
@@ -91,6 +93,15 @@ class HeroController extends Controller
     public function destroy(Hero $hero)
     {
         //
+    }
+
+    public function teams(){
+
+        $teams = Team::whereActive(1)->get();
+        $heroes = Hero::first();
+        $socialnetworks = SocialNetwork::whereStatus(1)->get();
+
+        return view('teams.index', compact('teams', 'heroes', 'socialnetworks'));
     }
 
     public function ligue()

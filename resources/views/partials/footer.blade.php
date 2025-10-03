@@ -18,9 +18,22 @@
                     <ul class="tc wf cg">
                         @foreach ($socialnetworks as $socialnetwork)
                             <li>
-                                <a href="{{ $socialnetwork->url }}" target="_blank">
-                                    <i data-lucide="{{ $socialnetwork->icon }}" class="w-6 h-6 text-gray-600 hover:text-blue-500 transition-colors duration-30"></i>
-                                </a>
+                                @if($socialnetwork->platform === 'whatsapp')
+                                    <a href="https://wa.me/{{ $socialnetwork->url }}?text=Bonjour%2C%20je%20suis%20intéressé(e)%20par%20vos%20services"
+                                       target="_blank"
+                                       class="tc wf yf bg">
+                                        <img src="{{asset('whatsapp.svg')}}" alt="WhatsApp" class="w-6 h-6">
+
+                                    </a>
+                                @else
+                                    <a href="{{ $socialnetwork->url }}"
+                                       target="_blank"
+                                       class="tc wf yf bg">
+                                        <!-- Otros iconos con Lucide -->
+                                        <i data-lucide="{{ $socialnetwork->icon }}"
+                                           class="w-6 h-6 text-gray-600 hover:text-blue-500 transition-colors duration-300"></i>
+                                    </a>
+                                @endif
                             </li>
                         @endforeach
                     </ul>
