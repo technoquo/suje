@@ -49,6 +49,9 @@ class HeroResource extends Resource
                 Forms\Components\TextInput::make('address')
                     ->label('Adresse')
                     ->required(),
+                Forms\Components\TextInput::make('hour_office')
+                    ->label('Horaires de bureau')
+                    ->required(),
                 Forms\Components\FileUpload::make('image')
                     ->label('Image')
                     ->image()

@@ -28,22 +28,22 @@
                 :class="{ 'tc': dropdown }">
 
                 <li class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded">
-                    <img src="{{asset('sports.gif')}}" alt="Seña Futsal Vétérans" class="w-10 h-10 rounded">
+                    <img src="{{asset('futsalveterene.gif')}}" alt="Seña Futsal Vétérans" class="w-10 h-10 rounded">
                     <a href="{{route('sport.activity',['slug' => 'veterans'])}}" class="xl">Futsal Vétérans</a>
                 </li>
 
                 <li class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded">
-                    <img src="{{asset('sports.gif')}}" alt="Seña Futsal Dames" class="w-10 h-10 rounded">
+                    <img src="{{asset('futsaldamme.gif')}}" alt="Seña Futsal Dames" class="w-10 h-10 rounded">
                     <a href="{{route('sport.activity',['slug' => 'dames'])}}" class="xl">Futsal Dames</a>
                 </li>
 
                 <li class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded">
-                    <img src="{{asset('sports.gif')}}" alt="Seña Futsal Juniors" class="w-10 h-10 rounded">
+                    <img src="{{asset('futsalyouth.gif')}}" alt="Seña Futsal Juniors" class="w-10 h-10 rounded">
                     <a href="{{route('sport.activity',['slug' => 'juniors'])}}" class="xl">Futsal Juniors</a>
                 </li>
 
                 <li class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded">
-                    <img src="{{asset('sports.gif')}}" alt="Seña Padel" class="w-10 h-10 rounded">
+                    <img src="{{asset('padel.gif')}}" alt="Seña Padel" class="w-10 h-10 rounded">
                     <a href="{{route('sport.activity',['slug' => 'padel'])}}" class="xl">Padel</a>
                 </li>
             </ul>

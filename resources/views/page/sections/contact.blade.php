@@ -42,6 +42,10 @@
                     <p>{{ $heroes->address }}</p>
                 </div>
                 <div class="fb">
+                    <h4 class="wj kk wm cc">Horaires de bureau</h4>
+                    <p>{{ $heroes->hour_office }}</p>
+                </div>
+                <div class="fb">
                     <h4 class="wj kk wm cc">Numéro de téléphone</h4>
                     <p><a href="#">{{ $heroes->phone }}</a></p>
                 </div>
