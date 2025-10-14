@@ -45,10 +45,11 @@ Route::get('/blog', [ \App\Http\Controllers\PostController::class, 'index' ])->n
 Route::get('/blog/{slug}', [ \App\Http\Controllers\PostController::class, 'show' ])->name('blog');
 Route::post('/blog/recherche', [ \App\Http\Controllers\PostController::class, 'search' ])->name('blog.search');
 Route::get('/activity/{slug}', [ \App\Http\Controllers\SportController::class, 'show' ])->name('sport.activity');
+Route::get('/calendrier/{slug}', [ \App\Http\Controllers\CalendarController::class, 'index' ])->name('sport.calendar');
 Route::get('/{slug}/{sport}', [ \App\Http\Controllers\SportController::class, 'index' ])->name('sport');
 Route::get('/evenements',[ \App\Http\Controllers\SportController::class, 'all' ])->name('activities.all');
 Route::post('/evenements/recherche', [ \App\Http\Controllers\SportController::class, 'search' ])->name('activities.search');
-Route::get('/evenements/{slug}/{sport}/{group}', [ \App\Http\Controllers\SportController::class, 'activities' ])->name('sport.activities');;
+Route::get('/evenements/{slug}', [ \App\Http\Controllers\SportController::class, 'activities' ])->name('sport.activities');;
 Route::get('/professionals', [ \App\Http\Controllers\ProfessionalController::class, 'index' ])->name('professional');
 Route::get('/violences', [ \App\Http\Controllers\ViolenceController::class, 'index' ])->name('violences');
 Route ::get('/location', [ \App\Http\Controllers\LocationController::class, 'index' ])->name('location.index');

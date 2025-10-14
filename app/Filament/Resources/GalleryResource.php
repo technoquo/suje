@@ -112,4 +112,9 @@ class GalleryResource extends Resource
             'edit' => Pages\EditGallery::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Oculta este recurso del menú de navegación
+    }
 }

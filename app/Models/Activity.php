@@ -11,14 +11,13 @@ class Activity extends Model
         'title',
         'slug',
         'description',
+        'section_id',
         'date_published',
         'status',
+        'whatsapp',
         'link_video',
         'link_google',
-        'pdf',
         'user_id',
-        'service_id',
-        'service_image_id',
         'group_id',
     ];
 
@@ -46,6 +45,11 @@ class Activity extends Model
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(\App\Models\Section::class);
     }
 
 

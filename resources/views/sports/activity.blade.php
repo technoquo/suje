@@ -9,37 +9,56 @@
                 <div class="tc sf yo zf kq">
                     <div class="ro">
                         <div class="animate_top rounded-md shadow-solid-13 bg-white dark:bg-blacksection border border-stroke dark:border-strokedark p-7.5 md:p-10">
-                            <img src="{{asset('storage/'. $activity->image)}}" alt="Blog" />
+                            <img src="{{asset('storage/'. $activity->image)}}" alt="Blog" class="w-1/2 h-auto" />
 
                             <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb gb">{{$activity->title}}</h2>
+
+                            <div class="flex flex-row items-center gap-4 mb-4">
+                                {{-- Botón de Google --}}
+                                @if ($activity->link_google)
+                                    <a href="{{ $activity->link_google }}"
+                                       target="_blank"
+                                       class="inline-block px-4 py-2 text-white bg-gray-700 rounded hover:bg-gray-900 transition">
+                                        Inscrivez-vous ici
+                                    </a>
+                                @endif
+
+                                {{-- Enlace de WhatsApp --}}
+                                @php
+                                    $url = trim($activity->whatsapp ?? '');
+                                    $url = preg_replace('/\p{Cf}+/u', '', $url);
+
+                                    if ($url && !str_starts_with($url, 'http://') && !str_starts_with($url, 'https://')) {
+                                        $url = 'https://' . ltrim($url, '/');
+                                    }
+                                @endphp
+
+                                @if ($url && filter_var($url, FILTER_VALIDATE_URL))
+                                    <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                                             alt="WhatsApp" width="40" height="40">
+                                    </a>
+                                @endif
+                            </div>
+
+
 
                             <ul class="tc uf cg 2xl:ud-gap-15 fb">
 {{--                                <li><span class="rc kk wm">Author: </span>{{ $activity->user->name }}</li>--}}
 {{--                                <li><span class="rc kk wm">Published On: </span>{{ \Carbon\Carbon::parse($activity->date_published)->locale('fr')->isoFormat('D MMMM YYYY') }}</li>--}}
                                 @if($activity->link_video)
-                                    <li><span class="rc kk wm">Video LSFB: </span>
+                                    <li>
                                         <iframe width="560" height="315" src="{{ $activity->link_video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </li>
                                 @endif
-                                @if($activity->pdf)
-                                    <li>
-                                        <a href="{{ asset('storage/' . $activity->pdf) }}" target="_blank" class="lk gh dk rg tc wf xf _l gi hi">
-                                            Télécharger le PDF
-                                        </a>
-                                    </li>
-                                @endif
+
+
                             </ul>
 
                             <div>
                                 {!! $activity->description !!}
                             </div>
-                            @if($activity->link_google)
-                                <div class="mt-4">
-                                    <a href="{{ $activity->link_google }}" target="_blank" class="inline-block px-4 py-2 text-white bg-gray-100 rounded hover:bg-gray-300 transition mt-5">
-                                        Inscrivez-vous ici
-                                    </a>
-                                </div>
-                            @endif
+
 
 
 

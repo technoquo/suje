@@ -27,25 +27,19 @@
             <ul class="a flex flex-col gap-2 p-2 bg-white shadow-lg rounded-lg w-56"
                 :class="{ 'tc': dropdown }">
 
-                <li class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded">
-                    <img src="{{asset('storage/futsalveterene.gif')}}" alt="Seña Futsal Vétérans" class="w-10 h-10 rounded">
-                    <a href="{{route('sport.activity',['slug' => 'veterans'])}}" class="xl">Futsal Vétérans</a>
-                </li>
+                @php
+                $sports = \Illuminate\Support\Facades\DB::table('sports')->where('is_active',1)->get();
+                @endphp
 
-                <li class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded">
-                    <img src="{{asset('storage/futsaldamme.gif')}}" alt="Seña Futsal Dames" class="w-10 h-10 rounded">
-                    <a href="{{route('sport.activity',['slug' => 'dames'])}}" class="xl">Futsal Dames</a>
-                </li>
+                @foreach($sports as $sport)
+                    <li class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded">
+                        <img src="{{ asset('storage/' . $sport->image) }}" alt="Icono {{ $sport->name }}" class="w-10 h-10 rounded">
+                        <a href="{{ route('sport.calendar', ['slug' => $sport->slug]) }}" class="xl">{{ $sport->name }}</a>
+                    </li>
+                @endforeach
 
-                <li class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded">
-                    <img src="{{asset('storage/futsalyouth.gif')}}" alt="Seña Futsal Juniors" class="w-10 h-10 rounded">
-                    <a href="{{route('sport.activity',['slug' => 'juniors'])}}" class="xl">Futsal Juniors</a>
-                </li>
 
-                <li class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded">
-                    <img src="{{asset('storage/padel.gif')}}" alt="Seña Padel" class="w-10 h-10 rounded">
-                    <a href="{{route('sport.activity',['slug' => 'padel'])}}" class="xl">Padel</a>
-                </li>
+
             </ul>
 
 

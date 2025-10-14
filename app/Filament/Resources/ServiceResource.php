@@ -18,7 +18,7 @@ class ServiceResource extends Resource
     protected static ?string $model = Service::class;
 
     protected static ?string $navigationLabel = "Sport";
-    protected static ?string $label = "Sport";
+    protected static ?string $label = "Service";
     protected static ?string $navigationGroup = 'Sports';
     protected static ?int $navigationSort = 1;
 
@@ -98,5 +98,10 @@ class ServiceResource extends Resource
             'create' => Pages\CreateService::route('/create'),
             'edit' => Pages\EditService::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Oculta este recurso del menú de navegación
     }
 }

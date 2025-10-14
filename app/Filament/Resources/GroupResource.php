@@ -143,4 +143,9 @@ class GroupResource extends Resource
             'edit' => Pages\EditGroup::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Oculta este recurso del menú de navegación
+    }
 }

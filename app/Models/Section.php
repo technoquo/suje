@@ -8,13 +8,10 @@ class Section extends Model
 {
     protected $fillable = [
         'section',
-        'title',
-        'description',
+        'slug',
+        'is_active',
     ];
 
 
-    public function services(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Service::class);
-    }
+
 }

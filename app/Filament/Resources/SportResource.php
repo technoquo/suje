@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SectionResource\Pages;
-use App\Filament\Resources\SectionResource\RelationManagers;
-use App\Models\Section;
+use App\Filament\Resources\SportResource\Pages;
+use App\Filament\Resources\SportResource\RelationManagers;
+use App\Models\Sport;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,21 +13,20 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SectionResource extends Resource
+class SportResource extends Resource
 {
-    protected static ?string $model = Section::class;
+    protected static ?string $model = Sport::class;
 
-    protected static ?string $navigationLabel = "Section";
-    protected static ?string $label = "Sections";
-    protected static ?string $navigationGroup = 'Sections';
+    protected static ?string $navigationLabel = "Sport";
+    protected static ?string $label = "Sport";
+    protected static ?string $navigationGroup = 'Sports';
     protected static ?int $navigationSort = 1;
-
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('section')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true) // Updates the slug as you type or on blur
@@ -37,6 +36,10 @@ class SectionResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('instagram')
+                    ->maxLength(255),
+                Forms\Components\FileUpload::make('image')
+                    ->image(),
                 Forms\Components\Toggle::make('is_active')
                     ->required(),
             ]);
@@ -46,10 +49,11 @@ class SectionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('section')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
 
@@ -77,9 +81,9 @@ class SectionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSections::route('/'),
-            'create' => Pages\CreateSection::route('/create'),
-            'edit' => Pages\EditSection::route('/{record}/edit'),
+            'index' => Pages\ListSports::route('/'),
+            'create' => Pages\CreateSport::route('/create'),
+            'edit' => Pages\EditSport::route('/{record}/edit'),
         ];
     }
 }

@@ -76,7 +76,7 @@
                                 {{ $activity->title }}
                             </a>
                         </h4>
-                         {{$activity->service->title}}  - {{ $activity->serviceimage->name }} - {{ $activity->group->title }}
+
                     </div>
                 </div>
             @empty

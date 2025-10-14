@@ -80,4 +80,9 @@ class YearResource extends Resource
             'edit' => Pages\EditYear::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Oculta este recurso del menú de navegación
+    }
 }

@@ -14,44 +14,11 @@ use Illuminate\Support\Facades\DB;
 class SportController extends Controller
 {
 
-    public function index($slug, $sport)
+    public function index()
     {
-
-
-
 
         $heroes = Hero::first();
         $socialNetworks = SocialNetwork::where('status', 1)->get();
-
-        // Obtener el servicio por slug
-        $service = Service::where('title', 'LIKE', "%$slug%")->first();
-
-        $services = Service::whereStatus(1)->get();
-
-
-
-        if (!$service) {
-            return redirect()->back()->withErrors(['error' => 'Servicio no encontrado.']);
-        }
-
-        // Obtener la imagen del servicio por nombre
-        $serviceImage = ServiceImage::where('name', 'LIKE', "%$sport%")
-            ->where('service_id', $service->id)
-            ->first();
-
-
-
-        if (!$serviceImage) {
-            return redirect()->back()->withErrors(['error' => 'Imagen del servicio no encontrada.']);
-        }
-
-        // Obtener el grupo relacionado
-        $groups = Group::where('service_id', $service->id)
-            ->where('sport', $serviceImage->id)
-            ->get();
-
-
-
 
         return view('sports.index', [
             'sport_slug' => $sport,
@@ -64,38 +31,24 @@ class SportController extends Controller
         ]);
     }
 
-    public function activities($slug, $sport, $group)
+    public function activities($slug)
     {
+
 
         $heroes = Hero::first();
         $socialNetworks = SocialNetwork::where('status', 1)->get();
 
-        $service = Service::where('title', 'LIKE', "%$slug%")->first();
-        $serviceImage = ServiceImage::where('name', 'LIKE', "%$sport%")->first();
 
-
-        $group_id = Group::where('slug', strtolower($group))
-            ->where('service_id', $service->id)
-            ->first();
-
-
-        if ($group_id) {
-            $activities = Activity::where('group_id', $group_id->id)
-                ->where('service_id', $service->id)
-                ->where('service_image_id', $group_id->sport)
+            $activities = Activity::where('slug', $slug)
                 ->where('status', 1)
                 ->paginate(6);
-        } else {
-            $activities = collect(); // or create a LengthAwarePaginator manually
-        }
+
 
         return view('sports.activities', [
             'heroes' => $heroes,
             'activities' => $activities,
-            'socialnetworks' => $socialNetworks,
-            'sport_slug' => $sport,
-            'ligue_slug' => $slug,
-            'group_slug' => $group_id->title ?? null,
+            'socialnetworks' => $socialNetworks
+
         ]);
     }
 
@@ -105,13 +58,10 @@ class SportController extends Controller
         $heroes = Hero::first();
         $socialnetworks = SocialNetwork::where('status', 1)->get();
         $activities = Activity::query()
-            ->where('activities.status', 1)
-            ->where('activities.service_id', 4) // el filtro por servicio
             ->where(function ($q) use ($search) {
                 $q->where('activities.title', 'LIKE', "%{$search}%")
                     ->orWhere('activities.description', 'LIKE', "%{$search}%");
             })
-            ->with(['group', 'service']) // eager loading si tienes relaciones en el modelo
             ->orderBy('activities.date_published', 'desc')
             ->paginate(6);
         return view('sports.all', compact('heroes', 'socialnetworks', 'activities'));
@@ -122,18 +72,16 @@ class SportController extends Controller
         $heroes = Hero::first();
         $socialNetworks = SocialNetwork::where('status', 1)->get();
 
-        $activities = DB::table('activities')
-            ->join('groups', 'activities.group_id', '=', 'groups.id')
-            ->where('groups.slug', 'LIKE', "%{$slug}%")
-            ->select('activities.*', 'groups.slug') // solo lo que realmente existe
-            ->paginate(6);
+        $activity = Activity::where('slug', $slug)
+            ->where('status', 1)
+            ->firstOrFail();
 
 
 
-        return view('sports.activities', [
+        return view('sports.activity', [
             'heroes' => $heroes,
             'socialnetworks' => $socialNetworks,
-            'activities' => $activities,
+            'activity' => $activity,
         ]);
     }
 
