@@ -84,24 +84,9 @@
 <!-- ===== Blog End ===== -->
 <!-- ===== Location Section Start ===== -->
 <section class="ji gp uq">
-    <!-- Section Title Start -->
-    <div>
-        <div class="animate_top bb ze rj ki xn vq">
-            <h2 class="fk vj pr kk wm on/5 gq/2 bb _b">
-                Location
-            </h2>
-        </div>
-    </div>
-    <!-- Section Title End -->
 
-    <div class="bb ye ki xn vq jb jo">
-        <div class="flex flex-col items-center justify-center min-h-[300px] text-center p-6">
-            <h3 class="text-2xl font-bold mb-4">🚧 Nous travaillons actuellement</h3>
-            <p class="text-lg text-gray-600">
-                Bientôt, notre section Location sera disponible avec tous nos produits.
-            </p>
-        </div>
-    </div>
+    <livewire:category-product />
+
 </section>
 <!-- ===== Location Section End ===== -->
 @endsection

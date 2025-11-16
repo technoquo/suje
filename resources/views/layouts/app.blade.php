@@ -59,11 +59,19 @@
 </head>
 
 <body
-        x-data="{ page: 'home', 'darkMode': false, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
-        x-init="
-         darkMode = JSON.parse(localStorage.getItem('darkMode'));
-         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
-        :class="{'b eh': darkMode === false}"
+        x-data="{ page: 'home', darkMode: false, stickyMenu: false, navigationOpen: false, scrollTop: false, ...cart() }"
+        x-init="init()"
+        @add-to-cart.window="
+        addToCart(
+            $event.detail.id,
+            $event.detail.quantity,
+            $event.detail.startDate,
+            $event.detail.endDate,
+            $event.detail.name,
+            $event.detail.price,
+            $event.detail.image
+        )
+    "
 >
 <!-- ===== Header Start ===== -->
 @include('partials.header')
@@ -96,7 +104,7 @@
 
 
 @stack('scripts')
-<script src="{{ asset('js/bundle.js') }}"></script>
+{{--<script src="{{ asset('js/bundle.js') }}"></script>--}}
 
 @livewireScripts
 

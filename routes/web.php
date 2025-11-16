@@ -54,11 +54,12 @@ Route::get('/professionals', [ \App\Http\Controllers\ProfessionalController::cla
 Route::get('/violences', [ \App\Http\Controllers\ViolenceController::class, 'index' ])->name('violences');
 Route ::get('/location', [ \App\Http\Controllers\LocationController::class, 'index' ])->name('location.index');
 Route::get('/location/detail/{slug}', [ \App\Http\Controllers\LocationController::class, 'show' ])->name('location.show');
+Route::get('/cart', [ \App\Http\Controllers\CartController::class, 'index' ])->name('cart.index');
 
 
-    Route::post('/rentals/check-availability', [RentalController::class, 'checkAvailability'])
-        ->name('rentals.check');
-    Route::post('/rentals', [RentalController::class, 'store'])->name('rentals.create');
-    Route::get('/rentals/order/{id}', [ RentalController::class, 'show'  ])->name('rentals.show');
+//    Route::post('/rentals/check-availability', [RentalController::class, 'checkAvailability'])
+//        ->name('rentals.check');
+//    Route::post('/rentals', [RentalController::class, 'store'])->name('rentals.create');
+//    Route::get('/rentals/order/{id}', [ RentalController::class, 'show'  ])->name('rentals.show');
 
 
