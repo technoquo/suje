@@ -73,7 +73,7 @@
 
                         <!-- Voir Panier -->
                         <a
-                                href=""
+                                href="{{route('cart.index')}}"
                                 class="w-full text-center bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
                         >
                             Voir le panier
@@ -204,13 +204,11 @@
 
                                     <!-- Botón Add to Cart -->
                                     <div class="mt-6">
-                                        <button
-                                                id="btn-check"
-                                                type="button"
-                                                class="lk gh dk rg tc wf xf _l gi hi w-full"
-                                        >
+                                        <button id="btn-check" type="button"
+                                                class="lk gh dk rg tc wf xf _l gi hi w-full">
                                             Ajouter au panier
                                         </button>
+
                                     </div>
                                 </div>
 
@@ -270,9 +268,9 @@
 
                     const qty = parseInt(document.getElementById('quantity').value);
                     const price = {{ $product->price_per_day }};
-
-                    // Imagen principal (ya existe en tu blade)
                     const image = "{{ $images[0] ?? '' }}";
+
+                    console.log('📸 Imagen para carrito:', image);
 
                     window.dispatchEvent(new CustomEvent('add-to-cart', {
                         detail: {
@@ -289,6 +287,7 @@
 
             });
         </script>
+
     @endpush
 
 @endsection

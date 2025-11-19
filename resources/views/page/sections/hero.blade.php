@@ -12,7 +12,7 @@
     <div class="bb ze ki xn 2xl:ud-px-0" >
         <div class="tc _o">
             <div class="animate_left jn/2">
-                <h1 class="fk vj zp or kk wm wb"> {{ $heroes->title}}.</h1>
+                <h1 class="fk vj zp or kk wm wb dark:text-white"> {{ $heroes->title}}.</h1>
                 <p class="fq">
                     {!! $heroes->description !!}
                 </p>

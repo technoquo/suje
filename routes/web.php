@@ -55,6 +55,10 @@ Route::get('/violences', [ \App\Http\Controllers\ViolenceController::class, 'ind
 Route ::get('/location', [ \App\Http\Controllers\LocationController::class, 'index' ])->name('location.index');
 Route::get('/location/detail/{slug}', [ \App\Http\Controllers\LocationController::class, 'show' ])->name('location.show');
 Route::get('/cart', [ \App\Http\Controllers\CartController::class, 'index' ])->name('cart.index');
+Route::post('/checkout', [ \App\Http\Controllers\CheckoutController::class, 'store' ])->name('checkout.store');
+Route::get('/checkout/success/{order}', [\App\Http\Controllers\CheckoutController::class, 'success'])
+    ->name('checkout.success');
+
 
 
 //    Route::post('/rentals/check-availability', [RentalController::class, 'checkAvailability'])

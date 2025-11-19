@@ -84,6 +84,39 @@ body {
     line-height: inherit; /* 2 */
 }
 
+/* =============== MODO OSCURO GLOBAL =============== */
+
+.dark body {
+    background-color: #0f172a !important;
+    color: #e5e7eb !important;
+}
+
+/* Fondos */
+.dark .hh,
+.dark .fh,
+.dark .qh,
+.dark .rh {
+    background-color: #1e293b !important;
+}
+
+/* Texto */
+.dark .pk,
+.dark .ok,
+.dark .kk {
+    color: #e5e7eb !important;
+}
+
+.dark h1,
+.dark h2,
+.dark h3 {
+    color: #ffffff !important;
+}
+
+/* Iconos */
+.dark svg {
+    fill: #e5e7eb !important;
+}
+
 /*
 1. Add the correct height in Firefox.
 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)

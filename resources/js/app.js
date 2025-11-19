@@ -1,18 +1,48 @@
 import './bootstrap';
 
-
-window.cart = function () {
+window.appData = function () {
     return {
+        page: 'home',
+        darkMode: false,
+        stickyMenu: false,
+        navigationOpen: false,
+        scrollTop: false,
 
         items: JSON.parse(localStorage.getItem('cart_items') || '{}'),
         count: 0,
 
         init() {
+            // Restaurar modo oscuro
+            const saved = localStorage.getItem('darkMode');
+            this.darkMode = saved ? JSON.parse(saved) : false;
+
+            // Contador de carrito
             this.updateCount();
+
+            // 🔥 Escuchar evento global "add-to-cart"
+            window.addEventListener('add-to-cart', (event) => {
+                const item = event.detail;
+
+                console.log("📦 add-to-cart recibido:", item);
+
+                this.addToCart(
+                    item.id,
+                    item.quantity,
+                    item.startDate,
+                    item.endDate,
+                    item.name,
+                    item.price,
+                    item.image
+                );
+            });
+        },
+
+        toggleDark() {
+            this.darkMode = !this.darkMode;
+            localStorage.setItem('darkMode', JSON.stringify(this.darkMode));
         },
 
         addToCart(id, quantity, startDate, endDate, name, price, image) {
-
             quantity = parseInt(quantity);
 
             // Calcular días
@@ -20,33 +50,29 @@ window.cart = function () {
             if (startDate && endDate) {
                 const d1 = new Date(startDate);
                 const d2 = new Date(endDate);
-                days = Math.max(1, (d2 - d1) / (1000 * 60 * 60 * 24)); // mínimo 1 día
+                days = Math.max(1, (d2 - d1) / (1000 * 60 * 60 * 24));
             }
 
-            // Calcular total
             const total_price = (quantity * price * days).toFixed(2);
 
-            // Si NO existe, lo agregamos
+            // Si el producto no está en carrito
             if (!this.items[id]) {
                 this.items[id] = {
-                    id: id,
-                    name: name,
-                    image: image,
-                    quantity: quantity,
-                    price: price,
+                    id, name, image,
+                    quantity, price,
                     date_debut: startDate,
                     date_fin: endDate,
-                    days: days,
-                    total_price: total_price
+                    days,
+                    total_price
                 };
+
             } else {
-                // Si YA existe, actualizamos cantidad y fechas
+                // Si ya existe, sumar cantidad
                 this.items[id].quantity += quantity;
 
                 if (startDate) this.items[id].date_debut = startDate;
                 if (endDate) this.items[id].date_fin = endDate;
 
-                // Recalcular días y total
                 const d1 = new Date(this.items[id].date_debut);
                 const d2 = new Date(this.items[id].date_fin);
                 this.items[id].days = Math.max(1, (d2 - d1) / (1000 * 60 * 60 * 24));
@@ -55,6 +81,7 @@ window.cart = function () {
                     (this.items[id].quantity * this.items[id].price * this.items[id].days).toFixed(2);
             }
 
+            // Guardar
             this.save();
             this.updateCount();
         },
@@ -72,5 +99,5 @@ window.cart = function () {
         save() {
             localStorage.setItem('cart_items', JSON.stringify(this.items));
         }
-    }
-}
+    };
+};

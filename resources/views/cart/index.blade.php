@@ -15,7 +15,7 @@
 
                 <!-- ========== FORMULARIO ========== -->
                 <div class="animate_top bg-white p-6 rounded-lg shadow-md">
-                    <form action="" method="POST" class="space-y-4">
+                    <form action="{{route('checkout.store')}}" method="POST" class="space-y-4">
                         @csrf
 
                         <div>
@@ -39,7 +39,7 @@
                             <textarea id="message" name="message" rows="4"
                                       class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 ci"></textarea>
                         </div>
-
+                        <input type="hidden" name="cart_items" :value="JSON.stringify(items)">
                         <button class="vc rg lk gh ml il hi gi _l">
                             Passer une commande
                         </button>
@@ -47,8 +47,7 @@
                 </div>
 
                 <!-- ========== RESUMEN DEL CARRITO ========== -->
-                <div class="animate_top bg-gray-50 p-6 rounded-lg shadow-md"
-                     x-data="cart()" x-init="init()">
+                <div class="animate_top bg-gray-50 p-6 rounded-lg shadow-md">
 
                     <h3 class="text-xl font-bold mb-4">Résumé de la commande</h3>
 
