@@ -7,37 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rental extends Model
 {
-    /** @use HasFactory<\Database\Factories\RentalFactory> */
-    use HasFactory;
-
     protected $fillable = [
         'user_id',
         'product_id',
+        'order_id',
         'date_debut',
         'date_fin',
-        'date_retour',
-        'quantity',
-        'prix_total',
-        'statut',
-        'penalite',
+        'return_date',
+        'total_price',
+        'penalty',
     ];
 
-    protected $casts = [
-        'start_date'  => 'date',
-        'end_date'    => 'date',
-        'return_date' => 'date',
-        'total_price'  => 'decimal:2',
-        'penalty'    => 'decimal:2',
-    ];
-
-
-    public function product()
+    public function order()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Order::class);
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+
 }
+

@@ -3,22 +3,20 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\RentalResource\Pages;
-use App\Filament\Resources\RentalResource\RelationManagers;
 use App\Models\Rental;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RentalResource extends Resource
 {
     protected static ?string $model = Rental::class;
 
     protected static ?string $navigationLabel = "Locations";
-    protected static ?string $label = "location";
+    protected static ?string $label = "Location";
     protected static ?string $navigationGroup = 'Locations';
     protected static ?int $navigationSort = 3;
 
@@ -36,35 +34,28 @@ class RentalResource extends Resource
                     ->label('Produit')
                     ->required(),
 
-                Forms\Components\DatePicker::make('start_date')
+                Forms\Components\DatePicker::make('date_debut')
                     ->label('Date de début')
                     ->required(),
 
-                Forms\Components\DatePicker::make('end_date')
+                Forms\Components\DatePicker::make('date_fin')
                     ->label('Date de fin')
                     ->required(),
 
                 Forms\Components\DatePicker::make('return_date')
                     ->label('Date de retour'),
 
-                Forms\Components\TextInput::make('total_price')
+                TextInput::make('prix_total')
                     ->numeric()
                     ->label('Prix total')
                     ->required(),
 
-                Forms\Components\Select::make('status')
-                    ->label('Statut')
-                    ->options([
-                        'pendiente' => 'En attente',
-                        'activo' => 'Actif',
-                        'devuelto' => 'Retourné',
-                        'con_multa' => 'Avec pénalité',
-                    ])
-                    ->required(),
-
-                Forms\Components\TextInput::make('penalty')
+                TextInput::make('penalite')
                     ->numeric()
-                    ->label('Pénalité'),
+                    ->label('Pénalité')
+                    ->default(0)
+                    ->nullable(),
+
             ]);
     }
 
@@ -72,17 +63,38 @@ class RentalResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')->label('Utilisateur'),
-                Tables\Columns\TextColumn::make('product.name')->label('Produit'),
-                Tables\Columns\TextColumn::make('start_date')->date()->label('Date de début'),
-                Tables\Columns\TextColumn::make('end_date')->date()->label('Date de fin'),
-                Tables\Columns\TextColumn::make('status')->label('Statut'),
-                Tables\Columns\TextColumn::make('total_price')->label('Prix total'),
-                Tables\Columns\TextColumn::make('penalty')->label('Pénalité'),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Utilisateur'),
+
+                Tables\Columns\TextColumn::make('product.name')
+                    ->label('Produit'),
+
+                Tables\Columns\TextColumn::make('date_debut')
+                    ->date()
+                    ->label('Date de début'),
+
+                Tables\Columns\TextColumn::make('date_fin')
+                    ->date()
+                    ->label('Date de fin'),
+
+                Tables\Columns\TextColumn::make('order.status')
+                    ->label('Statut de commande')
+                    ->formatStateUsing(function ($state) {
+                        return match($state) {
+                            'pending'  => 'En attente',
+                            'activo'   => 'Actif',
+                            'devuelto' => 'Retourné',
+                            default    => ucfirst($state),
+                        };
+                    }),
+
+                Tables\Columns\TextColumn::make('prix_total')
+                    ->label('Prix total'),
+
+                Tables\Columns\TextColumn::make('penalite')
+                    ->label('Pénalité'),
             ])
-            ->filters([
-                //
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
@@ -95,17 +107,15 @@ class RentalResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRentals::route('/'),
+            'index'  => Pages\ListRentals::route('/'),
             'create' => Pages\CreateRental::route('/create'),
-            'edit' => Pages\EditRental::route('/{record}/edit'),
+            'edit'   => Pages\EditRental::route('/{record}/edit'),
         ];
     }
 }

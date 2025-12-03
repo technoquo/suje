@@ -10,6 +10,7 @@ use App\Models\Feature;
 use App\Models\Hero;
 use App\Models\Order;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Service;
 use App\Models\SocialNetwork;
 use App\Models\Team;
@@ -42,7 +43,23 @@ class CheckoutController extends Controller
             'message.required'  => 'L’adresse complète est obligatoire.',
         ]);
 
-        // Crear orden
+        // 🔥 1. Validar stock antes de crear la orden
+        foreach ($cart as $item) {
+            $product = Product::find($item['id']);
+
+            if (!$product) {
+                return back()->with('error', "Le produit n'existe pas.");
+            }
+
+            if ($product->stock < $item['quantity']) {
+                return back()->with(
+                    'error',
+                    "Stock insuffisant pour '{$product->name}'. Stock actuel : {$product->stock}, demandé : {$item['quantity']}."
+                );
+            }
+        }
+
+        // 🔥 2. Crear orden
         $order = Order::create([
             'user_id'  => auth()->id(),
             'fullname' => $request->fullname,
@@ -52,7 +69,7 @@ class CheckoutController extends Controller
             'status'   => 'pending'
         ]);
 
-        // Guardar items
+        // 🔥 3. Guardar items + descontar stock
         foreach ($cart as $item) {
             $order->items()->create([
                 'product_id'  => $item['id'],
@@ -66,6 +83,10 @@ class CheckoutController extends Controller
                 'total_price' => $item['total_price'],
                 'penalty'     => 0,
             ]);
+
+            // 🔥 Restar stock
+            $product = Product::find($item['id']);
+            $product->decrement('stock', $item['quantity']);
         }
 
         $sellerEmail = "vendedor@tu-sitio.com"; // ← CAMBIA ESTO
