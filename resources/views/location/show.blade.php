@@ -281,7 +281,7 @@
                         return;
                     }
 
-                    console.log("✔ Listener ejecutado una sola vez — Cantité:", qty);
+
 
                     window.dispatchEvent(new CustomEvent('add-to-cart', {
                         detail: {

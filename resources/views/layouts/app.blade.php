@@ -49,7 +49,8 @@
     @stack('styles')
 </head>
 
-<body>
+<body x-data="appData()" x-init="init()" x-ref="app" x-spread="window.app = this">
+
 
 @include('partials.header')
 

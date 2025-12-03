@@ -2,6 +2,11 @@
 @section('content')
 
     <section class="ji gp uq">
+        @if(session('error'))
+            <div class="mb-4 p-4 bg-red-600 text-white rounded-lg text-center font-semibold">
+                {{ session('error') }}
+            </div>
+        @endif
         <!-- Título -->
         <div>
             <div class="animate_top bb ze rj ki xn vq">
@@ -29,6 +34,9 @@
                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
                                    value="{{ $user->name }}"
                             >
+                            @error('fullname')
+                            <p class="text-red-600 mt-1 text-sm">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
@@ -37,12 +45,21 @@
                                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
                                    value="{{ $user->email }}"
                             >
+                            @error('email')
+                            <p class="text-red-600 mt-1 text-sm">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
                             <label for="message">Adresse complète de votre domicile</label>
+
                             <textarea id="message" name="message" rows="4"
+
                                       class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 ci"></textarea>
+
+                            @error('message')
+                            <p class="text-red-600 mt-1 text-sm">{{ $message }}</p>
+                            @enderror
                         </div>
                         <input type="hidden" name="cart_items" :value="JSON.stringify(items)">
                         <button class="vc rg lk gh ml il hi gi _l">
@@ -117,7 +134,9 @@
                     <!-- BOTÓN PARA VACIAR CARRITO -->
                     <button class="vc rg lk gh ml il hi gi _l"
                             @click="viderPanier()"
-                            class="">
+                            x-show="count > 0"
+
+                    >
                         Vider le panier
                     </button>
 
@@ -136,6 +155,8 @@
             return {
                 viderPanier() {
                     this.items = {};
+
+                    this.count = 0;
                     localStorage.removeItem('cart_items');
                 },
             }

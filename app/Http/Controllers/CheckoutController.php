@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCreatedMail;
 use App\Models\About;
 use App\Models\Client;
 use App\Models\Counter;
@@ -15,13 +16,31 @@ use App\Models\Team;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
     public function store(Request $request)
     {
-
         $cart = json_decode($request->cart_items, true);
+
+
+
+        // 🚫 Si está vacío, NO crear la orden
+        if (!$cart || count($cart) === 0) {
+            return back()->with('error', 'Le panier est vide. Vous ne pouvez pas passer une commande.');
+        }
+
+        $request->validate([
+            'fullname' => 'required',
+            'email'    => 'required|email',
+            'message'  => 'required',
+        ], [
+            'fullname.required' => 'Le nom complet est obligatoire.',
+            'email.required'    => 'L\'email est obligatoire.',
+            'email.email'       => 'Veuillez entrer une adresse email valide.',
+            'message.required'  => 'L’adresse complète est obligatoire.',
+        ]);
 
         // Crear orden
         $order = Order::create([
@@ -33,13 +52,8 @@ class CheckoutController extends Controller
             'status'   => 'pending'
         ]);
 
-
-
         // Guardar items
         foreach ($cart as $item) {
-
-
-
             $order->items()->create([
                 'product_id'  => $item['id'],
                 'name'        => $item['name'],
@@ -54,12 +68,13 @@ class CheckoutController extends Controller
             ]);
         }
 
+        $sellerEmail = "vendedor@tu-sitio.com"; // ← CAMBIA ESTO
 
-
+        Mail::to($order->email)
+            ->cc($sellerEmail)
+            ->send(new OrderCreatedMail($order, $cart));
 
         return redirect()->route('checkout.success', $order);
-
-
     }
 
     public function success(Order $order)
