@@ -11,10 +11,15 @@
 
         <div class="bb ye ki xn vq jb jo">
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
+            <div
+                    x-data="checkout()"
 
+                    class="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
+
+
+                @if($user)
                 <!-- ========== FORMULARIO ========== -->
-                <div class="animate_top bg-white p-6 rounded-lg shadow-md">
+                <div class="animate_top  p-6 rounded-lg shadow-md">
                     <form action="{{route('checkout.store')}}" method="POST" class="space-y-4">
                         @csrf
 
@@ -45,15 +50,24 @@
                         </button>
                     </form>
                 </div>
-
+                @else
+                <div class="animate_top  p-6 rounded-lg shadow-md kk wm tj ec">
+                    <p class="mb-4">Veuillez vous connecter ou vous inscrire pour passer une commande.</p>
+                    <a href="{{ route('login') }}" class="vc rg lk gh ml il hi gi _l">
+                        Se connecter / S'inscrire
+                    </a>
+                </div>
+                @endif
                 <!-- ========== RESUMEN DEL CARRITO ========== -->
-                <div class="animate_top bg-gray-50 p-6 rounded-lg shadow-md">
+                <div class="animate_top  p-6 rounded-lg shadow-md">
 
-                    <h3 class="text-xl font-bold mb-4">Résumé de la commande</h3>
+                    <h3 class="text-xl font-bold mb-4  kk wm tj ec">Résumé de la commande</h3>
+
+
 
                     <!-- LISTA DE PRODUCTOS -->
                     <template x-for="item in Object.values(items)" :key="item.id">
-                        <div class="flex gap-4 p-4 bg-white rounded-lg shadow mb-4">
+                        <div class="flex gap-4 p-4  rounded-lg shadow mb-4">
 
                             <!-- Imagen -->
                             <img :src="item.image"
@@ -94,11 +108,18 @@
 
                     <!-- TOTAL GENERAL -->
                     <template x-if="Object.keys(items).length > 0">
-                        <div class="mt-6 p-4 bg-white rounded shadow text-right font-bold text-lg">
+                        <div class="mt-6 p-4  rounded shadow text-right font-bold text-lg">
                             Total général :
                             €<span x-text="totalGeneral()"></span>
                         </div>
                     </template>
+
+                    <!-- BOTÓN PARA VACIAR CARRITO -->
+                    <button class="vc rg lk gh ml il hi gi _l"
+                            @click="viderPanier()"
+                            class="">
+                        Vider le panier
+                    </button>
 
                 </div>
 
@@ -109,3 +130,15 @@
     </section>
 
 @endsection
+@push('scripts')
+    <script>
+        function checkout() {
+            return {
+                viderPanier() {
+                    this.items = {};
+                    localStorage.removeItem('cart_items');
+                },
+            }
+        }
+    </script>
+@endpush

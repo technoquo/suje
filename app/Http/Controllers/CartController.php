@@ -37,6 +37,7 @@ class CartController extends Controller
         if ($request->has('cart_items')) {
             $cart = json_decode($request->input('cart_items'), true);
 
+
             foreach ($cart as &$item) {
                 unset($item['totalPrice']);
             }

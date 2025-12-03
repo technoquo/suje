@@ -172,11 +172,11 @@
                                 @endif
 
 
-                                <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb gb mt-8 text-gray-900 dark:text-white">
+                                <div class="mt-8 uppercase">
                                     {{ $product->name }}
-                                </h2>
+                                </div>
 
-                                <p class="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-2 mb-4">
+                                <p class="mt-2 mb-4">
                                     Prix : €{{ number_format($product->price_per_day, 2, ',', ' ') }} / jour
                                 </p>
 
@@ -264,13 +264,24 @@
                 });
 
                 // Evento Add to Cart
-                document.getElementById('btn-check').addEventListener('click', function () {
+                const originalBtn = document.getElementById('btn-check');
+                originalBtn.replaceWith(originalBtn.cloneNode(true)); // ← limpia cualquier listener repetido
+
+                const btnCheck = document.getElementById('btn-check');
+
+                btnCheck.addEventListener('click', function () {
 
                     const qty = parseInt(document.getElementById('quantity').value);
                     const price = {{ $product->price_per_day }};
                     const image = "{{ $images[0] ?? '' }}";
 
-                    console.log('📸 Imagen para carrito:', image);
+                    // Validación de fechas
+                    if (!startDate || !endDate) {
+                        alert("Veuillez sélectionner une plage de dates avant d'ajouter au panier.");
+                        return;
+                    }
+
+                    console.log("✔ Listener ejecutado una sola vez — Cantité:", qty);
 
                     window.dispatchEvent(new CustomEvent('add-to-cart', {
                         detail: {
@@ -279,8 +290,9 @@
                             image: image,
                             quantity: qty,
                             price: price,
-                            startDate: startDate,
-                            endDate: endDate
+                            total: qty * price,
+                            start_date: startDate,
+                            end_date: endDate
                         }
                     }));
                 });

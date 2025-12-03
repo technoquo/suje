@@ -19,22 +19,26 @@ window.appData = function () {
             // Contador de carrito
             this.updateCount();
 
-            // 🔥 Escuchar evento global "add-to-cart"
-            window.addEventListener('add-to-cart', (event) => {
-                const item = event.detail;
+            if (!window.__ADD_TO_CART_LISTENER__) {
+                window.__ADD_TO_CART_LISTENER__ = true;
 
-                console.log("📦 add-to-cart recibido:", item);
+                window.addEventListener('add-to-cart', (event) => {
+                    const item = event.detail;
 
-                this.addToCart(
-                    item.id,
-                    item.quantity,
-                    item.startDate,
-                    item.endDate,
-                    item.name,
-                    item.price,
-                    item.image
-                );
-            });
+                    console.log("📦 add-to-cart recibido:", item);
+
+                    // Usa los nombres correctos
+                    this.addToCart(
+                        item.id,
+                        item.quantity,
+                        item.start_date,
+                        item.end_date,
+                        item.name,
+                        item.price,
+                        item.image
+                    );
+                });
+            }
         },
 
         toggleDark() {
