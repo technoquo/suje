@@ -6,6 +6,19 @@
     <strong>Numéro de commande :</strong> #{{ $order->id }}
 </p>
 
+<p>
+    <strong>Adresse du client :</strong><br>
+    {!! nl2br(e($order->address)) !!}
+</p>
+
+{{-- Dirección de la oficina (aquí pones la tuya real) --}}
+<p>
+    <strong>Adresse de retrait :</strong><br>
+    Rue Exemple 123<br>
+    5000 Namur<br>
+    Belgique
+</p>
+
 <p>Voici les détails :</p>
 
 <ul>

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\OrderResource\RelationManagers;
 
+use App\Mail\RentalPenaltyMail;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -10,6 +11,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RentalThanksMail;
+
 
 class ItemsRelationManager extends RelationManager
 {
@@ -48,17 +52,21 @@ class ItemsRelationManager extends RelationManager
                 Tables\Actions\Action::make('markReturned')
                     ->label('Marquer comme retourné')
                     ->color('success')
-                    ->visible(fn ($record) => ! $record->is_returned) // solo si NO devuelto
+                    ->visible(fn ($record) => ! $record->is_returned)
                     ->requiresConfirmation()
                     ->action(function ($record) {
 
-                        $today = now();
-                        $end = \Carbon\Carbon::parse($record->date_fin);
+                        $today = now()->startOfDay(); // hoy
+                        $end   = \Carbon\Carbon::parse($record->date_fin)->startOfDay(); // fecha fin
 
-                        $delay = $end->diffInDays($today, false);
-
-                        // multa solo si devuelve tarde
-                        $penalty = $delay < 0 ? abs($delay) * 5 : 0;
+                        // 🔍 Días de retraso SOLO si devuelve después de la fecha fin
+                        if ($today->greaterThan($end)) {
+                            $delay   = $end->diffInDays($today); // siempre número positivo
+                            $penalty = $delay * 5; // 5 € por día, ajusta si quieres
+                        } else {
+                            $delay   = 0;
+                            $penalty = 0;
+                        }
 
                         $record->update([
                             'is_returned' => true,
@@ -66,11 +74,30 @@ class ItemsRelationManager extends RelationManager
                             'penalty'     => $penalty,
                         ]);
 
-                        // actualizar total de la orden
-                        $order = $record->order;
+                        // 🔄 sumar stock devuelto
+                        if ($record->product && $record->quantity > 0) {
+                            $record->product->increment('stock', $record->quantity);
+                        }
+
+                        // 🧮 actualizar total de la orden
+                        $order        = $record->order;
                         $order->total = $order->items()->sum('total_price') + $order->items()->sum('penalty');
                         $order->save();
+
+                        // 📩 Enviar el email correcto
+                        if ($penalty <= 0) {
+                            // ✅ Sin penalidad (agradecimiento)
+                            Mail::to($order->email)
+                                ->bcc(env('SALES_EMAIL'))
+                                ->send(new \App\Mail\RentalThanksMail($record));
+                        } else {
+                            // ⚠ Con penalidad (aviso)
+                            Mail::to($order->email)
+                                ->bcc(env('SALES_EMAIL'))
+                                ->send(new \App\Mail\RentalPenaltyMail($record));
+                        }
                     }),
+
             ]);
     }
 }

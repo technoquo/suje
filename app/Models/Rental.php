@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Mail\OrderPaidMail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Rental extends Model
 {
@@ -17,6 +19,16 @@ class Rental extends Model
         'total_price',
         'penalty',
     ];
+
+
+    protected static function booted()
+    {
+        static::updated(function ($order) {
+            if ($order->isDirty('status') && $order->status === 'paid') {
+                Mail::to($order->email)->send(new OrderPaidMail($order));
+            }
+        });
+    }
 
     public function order()
     {

@@ -20,9 +20,10 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
-    protected static ?string $navigationLabel = 'Orders';
-    protected static ?string $pluralLabel = 'Orders';
+    protected static ?string $navigationLabel = "Commande";
+    protected static ?string $label = "Commande";
+    protected static ?string $navigationGroup = 'Locations';
+    protected static ?int $navigationSort = 4;
 
     // --------- FORMULARIO (solo editar estado) ----------
     public static function form(Form $form): Form

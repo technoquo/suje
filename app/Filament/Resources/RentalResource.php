@@ -15,6 +15,8 @@ class RentalResource extends Resource
 {
     protected static ?string $model = Rental::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationLabel = "Locations";
     protected static ?string $label = "Location";
     protected static ?string $navigationGroup = 'Locations';
@@ -77,7 +79,7 @@ class RentalResource extends Resource
                     ->date()
                     ->label('Date de fin'),
 
-                Tables\Columns\TextColumn::make('order.status')
+                Tables\Columns\TextColumn::make('statut')
                     ->label('Statut de commande')
                     ->formatStateUsing(function ($state) {
                         return match($state) {

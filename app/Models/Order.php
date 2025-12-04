@@ -2,13 +2,26 @@
 
 namespace App\Models;
 
+use App\Mail\OrderPaidMail;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Order extends Model
 {
     protected $fillable = [
         'user_id', 'fullname','email', 'address', 'total', 'status'
     ];
+
+    protected static function booted()
+    {
+        static::updated(function ($order) {
+            if ($order->isDirty('status') && $order->status === 'paid') {
+                Mail::to($order->email)
+                    ->bcc(env('SALES_EMAIL')) // 👈 copia oculta
+                    ->send(new OrderPaidMail($order));
+            }
+        });
+    }
 
     public function items()
     {
