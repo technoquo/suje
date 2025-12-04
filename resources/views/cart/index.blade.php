@@ -132,7 +132,7 @@
                     </template>
 
                     <!-- BOTÓN PARA VACIAR CARRITO -->
-                    <button class="vc rg lk gh ml il hi gi _l"
+                    <button class="vc rg lk oh ml il hi gi _l"
                             @click="viderPanier()"
                             x-show="count > 0"
 

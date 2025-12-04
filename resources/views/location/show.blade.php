@@ -40,7 +40,7 @@
                     class="fixed inset-0 z-50 flex items-center justify-center p-4"
                     @keydown.escape.window="isOpen = false"
             >
-                <div class="bg-white dark:bg-gray-900 rounded-lg shadow-2xl w-full max-w-md p-6">
+                <div class="bg-white rounded-lg shadow-2xl w-full max-w-md p-6">
 
                     <!-- Título -->
                     <h2 class="text-xl font-bold mb-4 text-center">
@@ -48,7 +48,7 @@
                     </h2>
 
                     <!-- Contenido -->
-                    <div class="space-y-2 text-gray-800 dark:text-gray-200">
+                    <div class="space-y-2 ">
 
                         <p><strong>Nom :</strong> <span x-text="item.name"></span></p>
 
@@ -74,7 +74,7 @@
                         <!-- Voir Panier -->
                         <a
                                 href="{{route('cart.index')}}"
-                                class="w-full text-center bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
+                                class="w-full text-center lk gh dk rg tc wf xf _l gi hi"
                         >
                             Voir le panier
                         </a>
@@ -82,7 +82,7 @@
                         <!-- Continuer -->
                         <a
                                 href="{{ route('location.index') }}"
-                                class="w-full text-center bg-gray-300 dark:bg-gray-700 dark:text-white py-2 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-600 transition"
+                                class="w-full text-center lk oh dk rg tc wf xf _l gi hi"
                         >
                             Continuer
                         </a>
@@ -177,6 +177,10 @@
                                 </div>
 
                                 <p class="mt-2 mb-4">
+                                    Disponibke : {{ $product->stock }}
+                                </p>
+
+                                <p class="mt-2 mb-4">
                                     Prix : €{{ number_format($product->price_per_day, 2, ',', ' ') }} / jour
                                 </p>
 
@@ -244,6 +248,7 @@
     @push('scripts')
         <script>
             const occupiedRanges = @json($occupiedRanges);
+            const maxStock = {{ $product->stock }};
 
             document.addEventListener('DOMContentLoaded', function () {
 
@@ -274,6 +279,12 @@
                     const qty = parseInt(document.getElementById('quantity').value);
                     const price = {{ $product->price_per_day }};
                     const image = "{{ $images[0] ?? '' }}";
+
+                    // ⚠ Validación de stock
+                    if (qty > maxStock) {
+                        alert("❌ Quantité trop élevée ! Seulement " + maxStock + " disponible(s).");
+                        return;
+                    }
 
                     // Validación de fechas
                     if (!startDate || !endDate) {

@@ -77,7 +77,7 @@ class OrderResource extends Resource
                         'success' => fn ($record) => !$record->is_late,
                     ])
                     ->formatStateUsing(fn ($state) =>
-                    $state ? 'Atrasado' : 'À jour'
+                    $state ? 'En retard' : 'À jour'
                     ),
                 TextColumn::make('created_at')
                     ->label('Date')

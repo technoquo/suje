@@ -47,11 +47,16 @@
                                 Prix : €{{ number_format($product->price_per_day, 2) }} / jour
                             </li>
                             <li class="wm">
-                                Stock : {{ $product->stock }}
+                                Disponible : {{ $product->stock }}
                             </li>
                         </ul>
                         <div class="mb-10 text-center">
-                            <a href="{{route('location.show', $product->slug)}}" class="rg lk gh  ml il gi hi">Louer maintenant</a>
+                            @if($product->stock == 0)
+                                <span class="rg lk oh  ml il gi hi">Indisponible</span>
+                            @else
+                                <a href="{{route('location.show', $product->slug)}}" class="rg lk gh  ml il gi hi">Louer maintenant</a>
+                            @endif
+
                         </div>
                     </div>
                 @endforeach

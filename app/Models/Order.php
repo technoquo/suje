@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Mail\OrderCancelledMail;
 use App\Mail\OrderPaidMail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
@@ -15,13 +16,26 @@ class Order extends Model
     protected static function booted()
     {
         static::updated(function ($order) {
-            if ($order->isDirty('status') && $order->status === 'paid') {
-                Mail::to($order->email)
-                    ->bcc(env('SALES_EMAIL')) // 👈 copia oculta
-                    ->send(new OrderPaidMail($order));
+
+            if ($order->isDirty('status')) {
+
+                // ✔ Pago completado
+                if ($order->status === 'paid') {
+                    Mail::to($order->email)
+                        ->bcc(env('SALES_EMAIL'))
+                        ->send(new OrderPaidMail($order));
+                }
+
+                // ❌ Pedido cancelado
+                if ($order->status === 'cancelled') {
+                    Mail::to($order->email)
+                        ->bcc(env('SALES_EMAIL'))
+                        ->send(new OrderCancelledMail($order));
+                }
             }
         });
     }
+
 
     public function items()
     {

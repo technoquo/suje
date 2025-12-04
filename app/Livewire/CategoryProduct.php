@@ -32,11 +32,11 @@ class CategoryProduct extends Component
         // Si la categoría es 0 → mostrar todos
         if ($this->selectedCategory == 0) {
             $this->groupedProducts = Product::where('active', 1)
-                ->where('stock', '>', 0)
+              //  ->where('stock', '>', 0)
                 ->get();
         } else {
             $this->groupedProducts = Product::where('active', 1)
-                ->where('stock', '>', 0)
+            //    ->where('stock', '>', 0)
                 ->where('category_id', $this->selectedCategory)
                 ->get();
         }
