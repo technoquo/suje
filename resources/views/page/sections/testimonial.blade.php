@@ -7,7 +7,7 @@
 
                 class="fk vj pr kk wm on/5 gq/2 bb _b"
             ></h2>
-            <p class="bb on/5 wo/5 hq">Connaître les mérites professionnels</p>
+            <p class="fk vj zp pr kk wm qb">Connaître les mérites professionnels</p>
         </div>
     </div>
     <!-- Section Title End -->
@@ -15,7 +15,9 @@
     <div class="bb ze ki xn ar">
         <div class="animate_top jb cq">
             <!-- Slider main container -->
-            <div class="swiper testimonial-01">
+            <div class="swiper testimonial-01"
+                 x-data="testimonialSlider()"
+                 x-init="init()">
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                     <!-- Slides -->
@@ -57,6 +59,7 @@
                 <div class="tc wf xf fg jb">
                     <div
                         class="swiper-button-prev c tc wf xf ie ld rg _g dh pf ml vr hh rm tl zm rl ym"
+                        @click="prev()"
                     >
                         <svg
                             class="th lm"
@@ -74,6 +77,7 @@
                     </div>
                     <div
                         class="swiper-button-next c tc wf xf ie ld rg _g dh pf ml vr hh rm tl zm rl ym"
+                        @click="next()"
                     >
                         <svg
                             class="th lm"
@@ -94,4 +98,5 @@
         </div>
     </div>
 </section>
+
 <!-- ===== Testimonials End ===== -->

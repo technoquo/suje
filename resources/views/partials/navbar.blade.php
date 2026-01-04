@@ -9,8 +9,7 @@
         <!-- Sports con submenú -->
         <li class="c i" x-data="{ dropdown: false }" @mouseenter="dropdown = true" @mouseleave="dropdown = false">
             <a href="#" class="xl tc wf yf bg"
-               @click.prevent="dropdown = !dropdown"
-               :class="{ 'mk': page === 'sports' }">
+               @click.prevent="dropdown = !dropdown">
                 Sports
                 <svg :class="{ 'wh': dropdown }"
                      class="th mm we fd pf"
@@ -47,8 +46,7 @@
         <!-- Vidéothèque -->
         <li class="c i" x-data="{ dropdown: false }" @mouseenter="dropdown = true" @mouseleave="dropdown = false">
             <a href="#" class="xl tc wf yf bg"
-               @click.prevent="dropdown = !dropdown"
-               :class="{ 'mk': page === 'videotheque' }">
+               @click.prevent="dropdown = !dropdown">
                 Vidéothèque
                 <svg :class="{ 'wh': dropdown }"
                      class="th mm we fd pf"

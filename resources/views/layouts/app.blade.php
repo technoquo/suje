@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      x-data="appData()" x-init="init()" x-ref="app" x-spread="window.app = this" :class="{ 'dark': darkMode }"
+>
 
 <head>
     <link rel="icon" type="image/png" href="{{ asset('favicon.ico') }}" sizes="96x96"/>
@@ -40,13 +42,13 @@
     <!-- Flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     @stack('styles')
 </head>
 
-<body x-data="appData()" x-init="init()" x-ref="app" x-spread="window.app = this">
+<body  >
 
 
 @include('partials.header')
