@@ -1,4 +1,5 @@
 import './bootstrap';
+import './bundle.js';
 
 window.appData = function () {
     return {

@@ -89,7 +89,7 @@ class CheckoutController extends Controller
             $product->decrement('stock', $item['quantity']);
         }
 
-        $sellerEmail = "vendedor@tu-sitio.com"; // ← CAMBIA ESTO
+        $sellerEmail = env('SALES_EMAIL'); // ← CAMBIA ESTO
 
         Mail::to($order->email)
             ->cc($sellerEmail)
