@@ -43,8 +43,8 @@ class ItemsRelationManager extends RelationManager
                     ->formatStateUsing(fn ($state) =>
                     $state > 0 ? number_format($state, 2, ',', ' ') . ' €' : '-'
                     ),
-                TextColumn::make('date_debut')->label('Début'),
-                TextColumn::make('date_fin')->label('Fin'),
+                TextColumn::make('date_debut')->label('Début')->date('d/m/Y'),
+                TextColumn::make('date_fin')->label('Fin')->date('d/m/Y'),
                 TextColumn::make('return_date')->label('Retourné le'),
             ])
             ->actions([

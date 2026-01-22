@@ -6,7 +6,7 @@
 </head>
 <body style="font-family: Arial, sans-serif; background: #f7f7f7; margin:0; padding:0;">
 
-<table width="100%" cellpadding="0" cellspacing="0" style="max-width:650px; margin:auto; background:#ffffff; border-radius:8px; overflow:hidden;">
+<table  style="max-width:650px; margin:auto; background:#ffffff; border-radius:8px; overflow:hidden;">
 
     {{-- Header con logo --}}
     <tr style="background:#FFFFFF; text-align:center;">
@@ -46,13 +46,14 @@
         <td style="padding:0 25px;">
             <h3 style="margin-top:20px; color:#111;">📦 Produits commandés :</h3>
 
-            <table width="100%" cellpadding="6" cellspacing="0" style="font-size:14px; border-collapse: collapse;">
+            <table  style="font-size:14px; border-collapse: collapse;">
                 @foreach ($order->items as $item)
                     <tr style="border-bottom:1px solid #ddd;">
                         <td width="70%">
                             <strong>{{ $item->product->name }}</strong><br>
                             Quantité : {{ $item->quantity }}<br>
-                            Du {{ $item->date_debut }} au {{ $item->date_fin }}
+                            Du {{ $item->date_debut->format('d/m/Y') }}
+                            au {{ $item->date_fin->format('d/m/Y') }}
                         </td>
                         <td width="30%" style="text-align:right; font-weight:bold;">
                             {{ number_format($item->price * $item->quantity, 2, ',', ' ') }} €
