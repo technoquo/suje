@@ -29,7 +29,7 @@
 >
 <!-- ===== Header Start ===== -->
 <!-- ===== Header Start ===== -->
-<x-partials.header :heroes="$heroes"/>
+@include('partials.header', ['heroes' => $heroes])
 <!-- ===== Header End ===== -->
 
 <!-- ===== Header End ===== -->
