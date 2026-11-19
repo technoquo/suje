@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class year extends Model
+class Year extends Model
 {
 
     protected $fillable = ['year', 'image', 'active'];
